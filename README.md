@@ -26,8 +26,8 @@ Then go ahead and reference the Paystack inline script in your index.html:
     class App extends Component {
     
     	state = {
-    		key: "####-####-####-####",
-    		email: "foobar@example.com",
+    		key: "pk_test_########################################", //PAYSTACK PUBLIC KEY
+    		email: "foobar@example.com",  // customer email
     		amount: 10000 //equals NGN100,
     	}
     
