@@ -39,7 +39,7 @@ Then go ahead and reference the Paystack inline script in your index.html:
     		console.log("Payment closed");
     	}
     
-    	getId = () => {
+    	getReference = () => {
     		//you can put any unique reference generated code here
     		let text = "";
     		let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
@@ -59,7 +59,7 @@ Then go ahead and reference the Paystack inline script in your index.html:
                 class="payButton"
                 callback={this.callback}
                 close={this.close}
-                reference={this.getId()}
+                reference={this.getReference()}
                 email={this.state.email}
                 amount={this.state.amount}
                 paystackkey={this.state.key}
