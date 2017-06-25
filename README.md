@@ -40,7 +40,7 @@ Then go ahead and reference the Paystack inline script in your index.html:
     	}
     
     	getReference = () => {
-    		//you can put any unique reference generated code here
+    		//you can put any unique reference implementation code here
     		let text = "";
     		let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
     
@@ -52,8 +52,8 @@ Then go ahead and reference the Paystack inline script in your index.html:
     
       render() {
         return (
-          <div className="App">
-            <p className="App-intro">
+          <div>
+            <p>
               <PaystackButton
                 text="Make Payment"
                 class="payButton"
@@ -72,7 +72,7 @@ Then go ahead and reference the Paystack inline script in your index.html:
     
     export default App;
 ```
-Please checkout [Paystack Documentation](https://developers.paystack.co/docs/paystack-inline) for other available options you can add to the directive
+Please checkout [Paystack Documentation](https://developers.paystack.co/docs/paystack-inline) for other available options you can add to the tag
 
 ## Deployment
 REMEMBER TO CHANGE THE KEY WHEN DEPLOYING ON A LIVE/PRODUCTION SYSTEM
