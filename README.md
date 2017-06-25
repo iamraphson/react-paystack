@@ -40,6 +40,7 @@ Then go ahead and reference the Paystack inline script in your index.html:
     	}
     
     	getId = () => {
+    		//you can put any unique reference generated code here
     		let text = "";
     		let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
     
