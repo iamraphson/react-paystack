@@ -8,7 +8,7 @@ This React library provides a wrapper to add Paystack Payments to your React app
 
 ### Install
 ```
-npm install https://github.com/iamraphson/react-paystack --save
+npm install react-paystack --save 
 ```
 
 Then go ahead and reference the Paystack inline script in your index.html:
