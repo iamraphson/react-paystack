@@ -4,7 +4,7 @@ This is a react library for implementing paystack payment gateway
 
 ###Demo
 
-![Alt text](React App 2017-06-28 05-36-12.png?raw=true "Demo Image")
+![Alt text](React_App.png?raw=true "Demo Image")
 
 ### Get Started
 
