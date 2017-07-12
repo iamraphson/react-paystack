@@ -2,6 +2,10 @@
 
 This is a react library for implementing paystack payment gateway
 
+###Demo
+
+![Alt text](React App 2017-06-28 05-36-12.png?raw=true "Demo Image")
+
 ### Get Started
 
 This React library provides a wrapper to add Paystack Payments to your React application
