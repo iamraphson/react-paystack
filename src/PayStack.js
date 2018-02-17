@@ -14,7 +14,8 @@ class PayStack extends Component {
 			quantity: this.props.quantity || "",
 			subaccount: this.props.subaccount || "",
 			transaction_charge: this.props.transaction_charge || 0,
-			bearer: this.props.bearer || ""
+			bearer: this.props.bearer || "",
+			disabled: this.props.disabled || false
 		}
 	}
 
@@ -44,7 +45,7 @@ class PayStack extends Component {
 	render(){
 		return (
 			<span>
-				<button onClick={this.payWithPaystack} className={this.state.class}>{this.state.text}</button>
+				<button onClick={this.payWithPaystack} className={this.state.class}>{this.state.text} disabled={this.state.disabled}</button>
 			</span>
 		);
 	}
