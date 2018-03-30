@@ -19,6 +19,11 @@ class PayStack extends Component {
     }
   }
   
+  
+   componentDidMount() {
+     this.props.embed ? this.payWithPaystack(): null
+   }
+  
   payWithPaystack = () => {
     let paystackOptions = {
       key: this.props.paystackkey,
