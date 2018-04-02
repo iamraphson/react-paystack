@@ -63,6 +63,8 @@ Then go ahead and reference the Paystack inline script in your index.html:
                 class="payButton"
                 callback={this.callback}
                 close={this.close}
+                disabled={true} {/*disable payment button*/}
+                embed={true} {/*payment embed in your app instead of a pop up*/}
                 reference={this.getReference()}
                 email={this.state.email}
                 amount={this.state.amount}
