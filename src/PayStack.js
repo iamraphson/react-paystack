@@ -14,14 +14,16 @@ class PayStack extends Component {
       quantity: this.props.quantity || "",
       subaccount: this.props.subaccount || "",
       transaction_charge: this.props.transaction_charge || 0,
-      bearer: this.props.bearer || ""
+      bearer: this.props.bearer || "",
+      disabled: this.props.disabled || false
     }
   }
-
-  componentDidMount() {
-    this.props.embed ? this.payWithPaystack(): null
-  }
-
+  
+  
+   componentDidMount() {
+     this.props.embed ? this.payWithPaystack(): null
+   }
+  
   payWithPaystack = () => {
     let paystackOptions = {
       key: this.props.paystackkey,
@@ -55,12 +57,16 @@ class PayStack extends Component {
     return this.props.embed ?
       (
         <div id="paystackEmbedContainer"></div>
-      ) : (
+      ) 
+      : 
+      (
         <span>
-          <button onClick={this.payWithPaystack} className={this.state.class}>{this.state.text}</button>
+          <button className={this.state.class} onClick={this.payWithPaystack} disabled={this.state.disabled}>
+            {this.state.text}
+          </button>
         </span>
       )
-  }
+    }
 }
 
 PayStack.propTypes = {
@@ -79,7 +85,8 @@ PayStack.propTypes = {
   amount: PropTypes.number.isRequired, //in kobo
   paystackkey: PropTypes.string.isRequired,
   callback: PropTypes.func.isRequired,
-  close: PropTypes.func.isRequired
+  close: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 }
 
 export default PayStack;
