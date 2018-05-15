@@ -60,7 +60,7 @@ Then go ahead and reference the Paystack inline script in your index.html:
             <p>
               <PaystackButton
                 text="Make Payment"
-                class="payButton"
+                className="enterCssButtonStyle"
                 callback={this.callback}
                 close={this.close}
                 disabled={true} {/*disable payment button*/}
