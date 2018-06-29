@@ -7,7 +7,7 @@ class PayStack extends Component {
 		super(props);
 		this.state = {
 			text: this.props.text || "Make Payment",
-			class: this.props.class || "",
+			class: this.props.class || this.props.className || "",
 			metadata: this.props.metadata || {},
 			currency: this.props.currency || "NGN",
 			plan: this.props.plan || "",
