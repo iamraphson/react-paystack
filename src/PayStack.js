@@ -63,7 +63,12 @@ class PayStack extends Component {
 			:
 			(
 				<span>
-          <button className={this.state.class} onClick={this.payWithPaystack} disabled={this.state.disabled}>
+          <button
+						type="button"
+						className={this.state.class}
+						onClick={this.payWithPaystack}
+						disabled={this.state.disabled}
+					>
             {this.state.text}
           </button>
         </span>
