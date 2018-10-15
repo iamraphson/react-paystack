@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 class PayStack extends Component {
   constructor(props) {
     super(props);
+    this.payWithPaystack = this.payWithPaystack.bind(this);
     this.state = {
       text: this.props.text || "Make Payment",
       class: this.props.class || this.props.className || "",
