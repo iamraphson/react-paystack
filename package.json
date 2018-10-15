@@ -5,7 +5,8 @@
   "main": "distribution/paystack.min.js",
   "scripts": {
     "test": "mocha --reporter spec test/testSetup.js \"test/**/*.spec.js\"",
-    "dist": "./node_modules/.bin/babel ./src/PayStack.js --out-file ./distribution/paystack.min.js --source-maps true"
+    "dist": "./node_modules/.bin/babel ./src/PayStack.js --out-file ./distribution/paystack.min.js --source-maps true",
+    "format": "prettier --write '**/**/*.{js,}'"
   },
   "repository": {
     "type": "git",
@@ -47,7 +48,9 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "jsdom": "9.11.0",
     "mocha": "^5.2.0",
+    "prettier": "^1.14.3",
     "react-addons-test-utils": "^15.6.2",
-    "react-scripts": "^2.0.5"
+    "react-scripts": "^2.0.5",
+    "sinon": "^7.0.0"
   }
 }
