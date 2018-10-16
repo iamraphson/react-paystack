@@ -126,7 +126,7 @@ describe("Paystack Component", () => {
     expect(PaystackWrapper.find("div")).to.have.length(1);
   });
 
-  it("try something", done => {
+  it("Called payWithPaystack when button is clicked", done => {
     const payWithPaystackSpy = sinon.mock(Paystack.prototype);
     payWithPaystackSpy.expects("payWithPaystack").once();
     const PaystackWrapper = mount(
@@ -144,5 +144,21 @@ describe("Paystack Component", () => {
     payWithPaystackSpy.restore();
     payWithPaystackSpy.verify();
     done();
+  });
+
+  it("Loaded Paystack script", () => {
+    const PaystackWrapper = mount(
+      <Paystack
+        reference={reference}
+        email={email}
+        amount={amount}
+        close={close}
+        text={btnText}
+        callback={callback}
+        paystackkey={key}
+      />
+    );
+    const { scriptLoaded } = PaystackWrapper.state();
+    expect(scriptLoaded).to.not.be.null;
   });
 });

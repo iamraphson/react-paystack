@@ -5,7 +5,9 @@ class PayStack extends Component {
   constructor(props) {
     super(props);
     this.payWithPaystack = this.payWithPaystack.bind(this);
+    this.loadScript = this.loadScript.bind(this);
     this.state = {
+      scriptLoaded: null,
       text: this.props.text || "Make Payment",
       class: this.props.class || this.props.className || "",
       metadata: this.props.metadata || {},
@@ -20,44 +22,80 @@ class PayStack extends Component {
   }
 
   componentDidMount() {
-    if (this.props.embed) {
-      this.payWithPaystack();
+    this.setState(
+      {
+        scriptLoaded: new Promise(resolve => {
+          this.loadScript(() => {
+            resolve();
+          });
+        })
+      },
+      () => {
+        if (this.props.embed) {
+          this.payWithPaystack();
+        }
+      }
+    );
+  }
+
+  loadScript(callback) {
+    const script = document.createElement("script");
+    script.src = "https://js.paystack.co/v1/inline.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+    if (script.readyState) {
+      // IE
+      script.onreadystatechange = () => {
+        if (
+          script.readyState === "loaded" ||
+          script.readyState === "complete"
+        ) {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else {
+      // Others
+      script.onload = () => {
+        callback();
+      };
     }
   }
 
-  payWithPaystack(e) {
-    e.preventDefault();
-    let paystackOptions = {
-      key: this.props.paystackkey,
-      email: this.props.email,
-      amount: this.props.amount,
-      ref: this.props.reference,
-      metadata: this.state.metadata,
-      callback: response => {
-        this.props.callback(response);
-      },
-      onClose: () => {
-        this.props.close();
-      },
-      currency: this.state.currency,
-      plan: this.state.plan,
-      quantity: this.state.quantity,
-      subaccount: this.state.subaccount,
-      transaction_charge: this.state.transaction_charge,
-      bearer: this.state.bearer
-    };
-    if (this.props.embed) {
-      paystackOptions.container = "paystackEmbedContainer";
-    }
-    const handler = window.PaystackPop.setup(paystackOptions);
-    if (!this.props.embed) {
-      handler.openIframe();
-    }
+  payWithPaystack() {
+    this.state.scriptLoaded &&
+      this.state.scriptLoaded.then(() => {
+        let paystackOptions = {
+          key: this.props.paystackkey,
+          email: this.props.email,
+          amount: this.props.amount,
+          ref: this.props.reference,
+          metadata: this.state.metadata,
+          callback: response => {
+            this.props.callback(response);
+          },
+          onClose: () => {
+            this.props.close();
+          },
+          currency: this.state.currency,
+          plan: this.state.plan,
+          quantity: this.state.quantity,
+          subaccount: this.state.subaccount,
+          transaction_charge: this.state.transaction_charge,
+          bearer: this.state.bearer
+        };
+        if (this.props.embed) {
+          paystackOptions.container = "paystackEmbedContainer";
+        }
+        const handler = window.PaystackPop.setup(paystackOptions);
+        if (!this.props.embed) {
+          handler.openIframe();
+        }
+      });
   }
 
   render() {
     return this.props.embed ? (
-      <div id="paystackEmbedContainer" className={this.state.class} />
+      <div id="paystackEmbedContainer" />
     ) : (
       <span>
         <button
