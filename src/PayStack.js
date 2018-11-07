@@ -99,7 +99,7 @@ class PayStack extends Component {
     return this.props.embed ? (
       <div id="paystackEmbedContainer" />
     ) : (
-      <span>
+      <React.Fragment>
         <CustomTag
           className={this.state.class}
           onClick={this.payWithPaystack}
@@ -107,7 +107,7 @@ class PayStack extends Component {
         >
           {this.state.text}
         </CustomTag>
-      </span>
+      </React.Fragment>
     );
   }
 }
