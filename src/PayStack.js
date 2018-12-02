@@ -94,19 +94,20 @@ class PayStack extends Component {
   }
 
   render() {
+    const CustomTag = `${this.props.tag}`;
+
     return this.props.embed ? (
       <div id="paystackEmbedContainer" />
     ) : (
-      <span>
-        <button
-          type="button"
+      <React.Fragment>
+        <CustomTag
           className={this.state.class}
           onClick={this.payWithPaystack}
           disabled={this.state.disabled}
         >
           {this.state.text}
-        </button>
-      </span>
+        </CustomTag>
+      </React.Fragment>
     );
   }
 }
@@ -128,7 +129,12 @@ PayStack.propTypes = {
   paystackkey: PropTypes.string.isRequired,
   callback: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  tag: PropTypes.oneOf(['button', 'a', 'input']),
+};
+
+PayStack.defaultProps = {
+  tag: 'button',
 };
 
 export default PayStack;
