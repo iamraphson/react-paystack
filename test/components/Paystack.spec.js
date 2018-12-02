@@ -16,20 +16,6 @@ const btnText = "Pay me,my money";
 const key = "PKSD";
 
 describe("Paystack Component", () => {
-  it("Paystack component renders span", () => {
-    const PaystackWrapper = mount(
-      <Paystack
-        reference={reference}
-        email={email}
-        amount={amount}
-        close={close}
-        text={btnText}
-        callback={callback}
-        paystackkey={key}
-      />
-    );
-    expect(PaystackWrapper.find("span")).to.have.length(1);
-  });
 
   it("Paystack renders button", () => {
     const PaystackWrapper = mount(
@@ -41,6 +27,7 @@ describe("Paystack Component", () => {
         text={btnText}
         callback={callback}
         paystackkey={key}
+        tag="button"
       />
     );
     expect(PaystackWrapper.find("button")).to.have.length(1);
@@ -56,33 +43,32 @@ describe("Paystack Component", () => {
         text={btnText}
         callback={callback}
         paystackkey={key}
+        tag="button"
       />
     );
     expect(PaystackWrapper.text()).to.contain(btnText);
   });
 
-  it("should have an initial text, currency, transaction_charge and disabled state", () => {
+  it("should have an initial text, currency and disabled state", () => {
     const PaystackWrapper = mount(
       <Paystack
         reference={reference}
         email={email}
         amount={amount}
         close={close}
-        text={btnText}
         callback={callback}
         paystackkey={key}
+        tag="button"
       />
     );
     const {
-      plan,
       currency,
       disabled,
-      transaction_charge
+      text
     } = PaystackWrapper.state();
-    expect(plan).to.be.empty;
     expect(currency).to.equal("NGN");
+    expect(text).to.equal("Make Payment");
     expect(disabled).to.be.false;
-    expect(transaction_charge).to.equal(0);
   });
 
   it("should have props for reference, email, amount, close, text, callback, plan, embed and paystackkey", () => {
@@ -95,6 +81,7 @@ describe("Paystack Component", () => {
         text={btnText}
         callback={callback}
         paystackkey={key}
+        tag="button"
       />
     );
     expect(PaystackWrapper.props().email).to.not.be.undefined;

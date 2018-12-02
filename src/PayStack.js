@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
 class PayStack extends Component {
@@ -10,13 +10,7 @@ class PayStack extends Component {
       scriptLoaded: null,
       text: this.props.text || "Make Payment",
       class: this.props.class || this.props.className || "",
-      metadata: this.props.metadata || {},
       currency: this.props.currency || "NGN",
-      plan: this.props.plan || "",
-      quantity: this.props.quantity || "",
-      subaccount: this.props.subaccount || "",
-      transaction_charge: this.props.transaction_charge || 0,
-      bearer: this.props.bearer || "",
       disabled: this.props.disabled || false
     };
   }
@@ -69,7 +63,7 @@ class PayStack extends Component {
           email: this.props.email,
           amount: this.props.amount,
           ref: this.props.reference,
-          metadata: this.state.metadata,
+          metadata: this.props.metadata || {},
           callback: response => {
             this.props.callback(response);
           },
@@ -77,11 +71,11 @@ class PayStack extends Component {
             this.props.close();
           },
           currency: this.state.currency,
-          plan: this.state.plan,
-          quantity: this.state.quantity,
-          subaccount: this.state.subaccount,
-          transaction_charge: this.state.transaction_charge,
-          bearer: this.state.bearer
+          plan: this.props.plan || "",
+          quantity: this.props.quantity || "",
+          subaccount: this.props.subaccount || "",
+          transaction_charge: this.props.transaction_charge || 0,
+          bearer: this.props.bearer || "",
         };
         if (this.props.embed) {
           paystackOptions.container = "paystackEmbedContainer";
@@ -99,7 +93,7 @@ class PayStack extends Component {
     return this.props.embed ? (
       <div id="paystackEmbedContainer" />
     ) : (
-      <React.Fragment>
+      <Fragment>
         <CustomTag
           className={this.state.class}
           onClick={this.payWithPaystack}
@@ -107,7 +101,7 @@ class PayStack extends Component {
         >
           {this.state.text}
         </CustomTag>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
