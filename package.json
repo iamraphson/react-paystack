@@ -1,6 +1,6 @@
 {
   "name": "react-paystack",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "This is an reactJS library for implementing paystack payment gateway",
   "main": "distribution/paystack.min.js",
   "scripts": {

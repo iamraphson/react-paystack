@@ -6,16 +6,19 @@ class PayStack extends Component {
     super(props);
     this.payWithPaystack = this.payWithPaystack.bind(this);
     this.loadScript = this.loadScript.bind(this);
+    this.loadscriptAndUpdateState = this.loadscriptAndUpdateState.bind(this);
     this.state = {
+      ...this.props,
       scriptLoaded: null,
-      text: this.props.text || "Make Payment",
-      class: this.props.class || this.props.className || "",
-      currency: this.props.currency || "NGN",
-      disabled: this.props.disabled || false
+      class: this.props.class || this.props.className || ""
     };
   }
 
   componentDidMount() {
+    this.loadscriptAndUpdateState()
+  }
+
+  loadscriptAndUpdateState() {
     this.setState(
       {
         scriptLoaded: new Promise(resolve => {
@@ -55,33 +58,55 @@ class PayStack extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    for (const index in prevProps) {
+      if (prevState[index] !== this.state[index]) {
+        this.loadscriptAndUpdateState()
+      }
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    for (const index in nextProps) {
+      if (nextProps[index] !== prevState[index]) {
+        return {
+          scriptLoaded: null,
+          [index]: nextProps[index]
+        }
+      }
+    }
+
+    return null;
+  }
+
   payWithPaystack() {
     this.state.scriptLoaded &&
       this.state.scriptLoaded.then(() => {
+        console.log('ref:', this.state.reference)
         let paystackOptions = {
-          key: this.props.paystackkey,
-          email: this.props.email,
-          amount: this.props.amount,
-          ref: this.props.reference,
-          metadata: this.props.metadata || {},
+          key: this.state.paystackkey,
+          email: this.state.email,
+          amount: this.state.amount,
+          ref: this.state.reference,
+          metadata: this.state.metadata || {},
           callback: response => {
-            this.props.callback(response);
+            this.state.callback(response);
           },
           onClose: () => {
-            this.props.close();
+            this.state.close();
           },
           currency: this.state.currency,
-          plan: this.props.plan || "",
-          quantity: this.props.quantity || "",
-          subaccount: this.props.subaccount || "",
-          transaction_charge: this.props.transaction_charge || 0,
-          bearer: this.props.bearer || "",
+          plan: this.state.plan || "",
+          quantity: this.state.quantity || "",
+          subaccount: this.state.subaccount || "",
+          transaction_charge: this.state.transaction_charge || 0,
+          bearer: this.state.bearer || "",
         };
-        if (this.props.embed) {
+        if (this.state.embed) {
           paystackOptions.container = "paystackEmbedContainer";
         }
         const handler = window.PaystackPop.setup(paystackOptions);
-        if (!this.props.embed) {
+        if (!this.state.embed) {
           handler.openIframe();
         }
       });
@@ -89,7 +114,6 @@ class PayStack extends Component {
 
   render() {
     const CustomTag = `${this.props.tag}`;
-
     return this.props.embed ? (
       <div id="paystackEmbedContainer" />
     ) : (
@@ -129,6 +153,9 @@ PayStack.propTypes = {
 
 PayStack.defaultProps = {
   tag: 'button',
+  text: "Make Payment",
+  currency: "NGN",
+  disabled: false
 };
 
 export default PayStack;
