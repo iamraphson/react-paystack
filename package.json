@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --reporter spec test/testSetup.js \"test/**/*.spec.js\"",
     "dist": "./node_modules/.bin/babel ./src/PayStack.js --out-file ./distribution/paystack.min.js --source-maps true",
-    "format": "prettier --write '**/**/*.{js,}'"
+    "format": "prettier --write '**/**/*.{js,}'",
+    "start": "react-scripts start"
   },
   "repository": {
     "type": "git",
@@ -52,5 +53,11 @@
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^2.0.5",
     "sinon": "^7.0.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

@@ -158,10 +158,11 @@ PayStack.propTypes = {
 };
 
 PayStack.defaultProps = {
-  tag: 'button',
-  text: "Make Payment",
-  currency: "NGN",
-  disabled: false
+    tag: 'button',
+    text: "Make Payment",
+    currency: "NGN",
+    disabled: false,
+    metadata: null
 };
 
 export default PayStack;
