@@ -26,18 +26,18 @@ class PayStack extends Component {
             resolve();
           });
         })
-      },
-      () => {
+      }
+      /*() => {
         if (this.props.embed) {
           this.payWithPaystack();
         }
-      }
+      }*/
     );
   }
 
   loadScript(callback) {
     const script = document.createElement("script");
-    script.src = "https://js.paystack.co/v1/inline.js";
+    script.src = "https://js.paystack.co/v2/inline.js";
     document.getElementsByTagName("head")[0].appendChild(script);
     if (script.readyState) {
       // IE
@@ -58,19 +58,10 @@ class PayStack extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    for (const index in prevProps) {
-      if (prevState[index] !== this.state[index]) {
-        this.loadscriptAndUpdateState()
-      }
-    }
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     for (const index in nextProps) {
       if (nextProps[index] !== prevState[index]) {
         return {
-          scriptLoaded: null,
           [index]: nextProps[index]
         }
       }
@@ -82,8 +73,33 @@ class PayStack extends Component {
   payWithPaystack() {
     this.state.scriptLoaded &&
       this.state.scriptLoaded.then(() => {
-        console.log('ref:', this.state.reference)
-        let paystackOptions = {
+      const {
+        paystackkey,
+        email,
+        amount,
+        callback,
+        close,
+        currency,
+        metadata,
+        reference
+      } = this.state
+
+
+      const payload = {
+        key: paystackkey,
+        email,
+        amount,
+        currency,
+        metadata,
+        reference,
+        onSuccess: (transaction) => callback(transaction),
+        onCancel: () => close()
+      }
+
+      const paystackInstance  = new window.PaystackPop();
+      paystackInstance.newTransaction(payload)
+
+        /*let paystackOptions = {
           key: this.state.paystackkey,
           email: this.state.email,
           amount: this.state.amount,
@@ -101,22 +117,13 @@ class PayStack extends Component {
           subaccount: this.state.subaccount || "",
           transaction_charge: this.state.transaction_charge || 0,
           bearer: this.state.bearer || "",
-        };
-        if (this.state.embed) {
-          paystackOptions.container = "paystackEmbedContainer";
-        }
-        const handler = window.PaystackPop.setup(paystackOptions);
-        if (!this.state.embed) {
-          handler.openIframe();
-        }
+        };*/
       });
   }
 
   render() {
     const CustomTag = `${this.props.tag}`;
-    return this.props.embed ? (
-      <div id="paystackEmbedContainer" />
-    ) : (
+    return (
       <Fragment>
         <CustomTag
           className={this.state.class}
@@ -131,7 +138,6 @@ class PayStack extends Component {
 }
 
 PayStack.propTypes = {
-  embed: PropTypes.bool,
   text: PropTypes.string,
   class: PropTypes.string,
   metadata: PropTypes.object,
