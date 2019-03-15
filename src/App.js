@@ -37,16 +37,16 @@ class App extends Component {
       <div className="App">
         <div className="App-intro">
           <PaystackButton
-			  text="Make Payment"
-			  class="payButton"
-			  callback={this.callback}
-			  close={this.close}
+						text="Make Payment"
+						class="payButton"
+						callback={this.callback}
+						close={this.close}
 	          disabled={false}
 	          embed={false}
 	          reference={this.getReference()}
 	          email={this.state.email}
 	          amount={Number(this.state.amount)}
-			  paystackkey={this.state.key}
+						paystackkey={this.state.key}
           />
         </div>
       </div>

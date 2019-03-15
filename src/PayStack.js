@@ -27,11 +27,6 @@ class PayStack extends Component {
           });
         })
       }
-      /*() => {
-        if (this.props.embed) {
-          this.payWithPaystack();
-        }
-      }*/
     );
   }
 
@@ -81,9 +76,25 @@ class PayStack extends Component {
         close,
         currency,
         metadata,
-        reference
+        reference,
+        error,
+        load,
+        firstname,
+        lastname,
+        phone,
+        customercode,
+        channels,
+        paymentrequest,
+        paymentpage,
+        subaccount,
+        bearer,
+        transaction_charge,
+        plan,
+        subscription_count,
+        plan_interval,
+        subscription_limit,
+        subscription_date
       } = this.state
-
 
       const payload = {
         key: paystackkey,
@@ -93,32 +104,35 @@ class PayStack extends Component {
         metadata,
         reference,
         onSuccess: (transaction) => callback(transaction),
-        onCancel: () => close()
+        onCancel: () => close(),
+        onLoad: (response) => load(response),
+        onError: (response) => error(response),
+        firstName: firstname,
+        lastName: lastname,
+        phone,
+        channels,
+        paymentRequest: paymentrequest,
+        paymentPage: paymentpage,
+        subaccountCode: subaccount,
+        bearer,
+        transactionCharge: transaction_charge,
+        subscriptionCount: subscription_count,
+        planInterval: plan_interval,
+        subscriptionLimit: subscription_limit,
+        subscriptionStartDate: subscription_date
+      }
+
+      if(customercode){
+        payload.customerCode = customercode
+      }
+
+      if(plan){
+        payload.planCode = plan
       }
 
       const paystackInstance  = new window.PaystackPop();
       paystackInstance.newTransaction(payload)
-
-        /*let paystackOptions = {
-          key: this.state.paystackkey,
-          email: this.state.email,
-          amount: this.state.amount,
-          ref: this.state.reference,
-          metadata: this.state.metadata || {},
-          callback: response => {
-            this.state.callback(response);
-          },
-          onClose: () => {
-            this.state.close();
-          },
-          currency: this.state.currency,
-          plan: this.state.plan || "",
-          quantity: this.state.quantity || "",
-          subaccount: this.state.subaccount || "",
-          transaction_charge: this.state.transaction_charge || 0,
-          bearer: this.state.bearer || "",
-        };*/
-      });
+    });
   }
 
   render() {
@@ -140,29 +154,59 @@ class PayStack extends Component {
 PayStack.propTypes = {
   text: PropTypes.string,
   class: PropTypes.string,
-  metadata: PropTypes.object,
-  currency: PropTypes.string,
-  plan: PropTypes.string,
-  quantity: PropTypes.string,
-  subaccount: PropTypes.string,
-  transaction_charge: PropTypes.number,
-  bearer: PropTypes.string,
-  reference: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  amount: PropTypes.number.isRequired, //in kobo
+  tag: PropTypes.oneOf(['button', 'a', 'input']),
+  disabled: PropTypes.bool,
   paystackkey: PropTypes.string.isRequired,
+  amount: PropTypes.number.isRequired, //in kobo
+  currency: PropTypes.string,
+  email: PropTypes.string.isRequired,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
+  phone: PropTypes.string,
+  customercode: PropTypes.string,
+  channels: PropTypes.array,
+  paymentrequest: PropTypes.string,
+  paymentpage: PropTypes.string,
+  metadata: PropTypes.object,
+  reference: PropTypes.string.isRequired,
+  error: PropTypes.func,
+  load: PropTypes.func,
   callback: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  disabled: PropTypes.bool,
-  tag: PropTypes.oneOf(['button', 'a', 'input']),
+  subaccount: PropTypes.string,
+  bearer: PropTypes.string,
+  transaction_charge: PropTypes.number,
+  plan: PropTypes.string,
+  subscription_count: PropTypes.number,
+  plan_interval: PropTypes.string,
+  subscription_limit: PropTypes.number,
+  subscription_date: PropTypes.string,
+
 };
 
 PayStack.defaultProps = {
-    tag: 'button',
-    text: "Make Payment",
-    currency: "NGN",
-    disabled: false,
-    metadata: null
+  tag: 'button',
+  text: "Make Payment",
+  currency: "NGN",
+  disabled: false,
+  firstname: "",
+  lastname: "",
+  phone: "",
+  customercode: null,
+  channels: [],
+  paymentrequest: "",
+  paymentpage: "",
+  error: (res) => {},
+  load: (res) => {},
+  metadata: null,
+  subaccount: "",
+  bearer: "",
+  transaction_charge: 0,
+  subscription_count:0,
+  plan: null,
+  plan_interval: "",
+  subscription_limit: 0,
+  subscription_date: "",
 };
 
 export default PayStack;
