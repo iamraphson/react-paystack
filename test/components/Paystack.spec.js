@@ -91,10 +91,12 @@ describe("Paystack Component", () => {
     expect(PaystackWrapper.props().paystackkey).to.not.be.undefined;
     expect(PaystackWrapper.props().amount).to.not.be.undefined;
     expect(PaystackWrapper.props().reference).to.not.be.undefined;
-    expect(PaystackWrapper.props().plan).to.be.undefined;
+    expect(PaystackWrapper.props().plan).to.be.null;
     expect(PaystackWrapper.props().embed).to.be.undefined;
   });
 
+  //Paystack v2 library does not have embed function at the moment
+  /*
   it("should render embed div only", () => {
     const PaystackWrapper = mount(
       <Paystack
@@ -111,7 +113,7 @@ describe("Paystack Component", () => {
       embed: true
     });
     expect(PaystackWrapper.find("div")).to.have.length(1);
-  });
+  });*/
 
   it("Called payWithPaystack when button is clicked", done => {
     const payWithPaystackSpy = sinon.mock(Paystack.prototype);
