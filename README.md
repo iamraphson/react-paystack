@@ -11,6 +11,7 @@ This is a react library for implementing paystack payment gateway
 This React library provides a wrapper to add Paystack Payments to your React application
 
 ### Install
+
 ```
 npm install react-paystack --save
 ```
@@ -55,7 +56,7 @@ npm install react-paystack --save
             <p>
               <PaystackButton
                 text="Make Payment"
-                class="payButton"
+                className="payButton"
                 callback={this.callback}
                 close={this.close}
                 disabled={true} {/*disable payment button*/}
@@ -74,12 +75,15 @@ npm install react-paystack --save
 
     export default App;
 ```
+
 Please checkout [Paystack Documentation](https://developers.paystack.co/docs/paystack-inline) for other available options you can add to the tag
 
 ## Deployment
+
 REMEMBER TO CHANGE THE KEY WHEN DEPLOYING ON A LIVE/PRODUCTION SYSTEM
 
 ## Contributing
+
 1. Fork it!
 2. Create your feature branch: `git checkout -b feature-name`
 3. Commit your changes: `git commit -am 'Some commit message'`
@@ -96,5 +100,5 @@ Thanks!
 Ayeni Olusegun.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
