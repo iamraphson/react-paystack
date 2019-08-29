@@ -116,7 +116,7 @@ PayStack.propTypes = {
   subaccount: PropTypes.string,
   transaction_charge: PropTypes.number,
   bearer: PropTypes.string,
-  reference: PropTypes.string.isRequired,
+  reference: PropTypes.string,
   email: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired, //in kobo
   paystackkey: PropTypes.string.isRequired,
