@@ -2,18 +2,24 @@
 
 This is a react library for implementing paystack payment gateway
 
-###Demo
+## Demo
 
-![Alt text](React_App.png?raw=true "Demo Image")
+![Demo](React_App.png?raw=true "Demo Image")
 
-### Get Started
+## Get Started
 
 This React library provides a wrapper to add Paystack Payments to your React application
 
 ### Install
 
-```
+```sh
 npm install react-paystack --save
+```
+
+or with `yarn`
+
+```sh
+yarn add react-paystack
 ```
 
 ### Usage
