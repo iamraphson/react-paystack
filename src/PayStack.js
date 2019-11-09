@@ -20,7 +20,6 @@ function PayStack(props) {
   const payWithPaystack = () => {
     payStackState.scriptLoaded &&
     payStackState.scriptLoaded.then(() => {
-        console.log('ref:', payStackState.reference)
         let paystackOptions = {
           key: payStackState.paystackkey,
           email: payStackState.email,
