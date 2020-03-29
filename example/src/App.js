@@ -7,7 +7,7 @@ const config = {
     reference: (new Date()).getTime(),
     email: "user@example.com",
     amount: 20000,
-    publicKey: 'pk_test_d8a7e69bada4d0a25d0e62b571b259208c9f4328',
+    publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
 };
 
 const PaystackHookExample = () => {
