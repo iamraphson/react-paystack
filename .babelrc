@@ -1,8 +1,0 @@
-{
-  "presets": [
-    "@babel/preset-env",
-    "airbnb",
-    "@babel/preset-react",
-    "@babel/preset-stage-2"
-  ]
-}

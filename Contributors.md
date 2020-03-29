@@ -1,2 +1,0 @@
-Adavize Ozorku
-Ropo Olatujoye

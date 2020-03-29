@@ -1,12 +1,17 @@
 {
   "name": "react-paystack",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "This is an reactJS library for implementing paystack payment gateway",
-  "main": "distribution/paystack.min.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "typings": "dist/index.d.ts",
+  "jsnext:main": "dist/index.es.js",
   "scripts": {
-    "test": "mocha --reporter spec test/testSetup.js \"test/**/*.spec.js\"",
-    "dist": "./node_modules/.bin/babel ./src/PayStack.js --out-file ./distribution/paystack.min.js --source-maps true",
-    "format": "prettier --write '**/**/*.{js,}'"
+    "build": "rm -rf dist && rollup -c ",
+    "build:watch": "rm -rf dist && rollup -c --watch",
+    "format": "prettier --write '**/**/*.{js,}'",
+    "lint": "eslint --ext .js,.ts,.tsx,.jsx --ignore-path .eslintignore .",
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -27,29 +32,31 @@
     "url": "https://github.com/iamraphson/react-paystack/issues"
   },
   "homepage": "https://github.com/iamraphson/react-paystack#readme",
-  "dependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.5.2"
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
-    "@babel/preset-stage-0": "^7.8.3",
-    "@babel/preset-stage-2": "^7.8.3",
-    "babel-loader": "^8.0.6",
-    "babel-preset-airbnb": "^4.4.0",
-    "babelify": "^10.0.0",
-    "chai": "^4.2.0",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "jsdom": "9.11.0",
-    "mocha": "^5.2.0",
-    "prettier": "^1.14.3",
-    "react-addons-test-utils": "^15.6.2",
-    "react-scripts": "^3.0.1",
-    "sinon": "^7.0.0"
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-typescript": "^4.0.0",
+    "@types/react": "^16.9.26",
+    "@types/react-dom": "^16.9.5",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "^2.0.2",
+    "rollup": "^2.2.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.2",
+    "rollup-plugin-typescript2": "^0.26.0",
+    "typescript": "^3.8.3"
   }
 }
