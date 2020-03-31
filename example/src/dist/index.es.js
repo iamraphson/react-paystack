@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, forwardRef, useContext } from 'react';
 
 var cachedScripts = [];
 function usePaystackScript() {
@@ -87,6 +87,7 @@ function usePaystackPayment(options) {
     }, [scriptError]);
     return initializePayment;
 }
+//# sourceMappingURL=use-paystack.js.map
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -102,6 +103,17 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 
 function __rest(s, e) {
     var t = {};
@@ -120,6 +132,35 @@ var PaystackButton = function (_a) {
     var initializePayment = usePaystackPayment(others);
     return (React.createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
 };
+//# sourceMappingURL=paystack-button.js.map
 
-export { PaystackButton, usePaystackPayment };
+var PaystackContext = createContext({
+    initializePayment: function () { return null; },
+    onSuccess: function () { return null; },
+    onClose: function () { return null; },
+});
+//# sourceMappingURL=paystack-context.js.map
+
+var PaystackProvider = function (_a) {
+    var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
+    var initializePayment = usePaystackPayment(others);
+    return (React.createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
+};
+//# sourceMappingURL=paystack-provider.js.map
+
+var PaystackConsumerChild = function (_a) {
+    var children = _a.children, ref = _a.ref;
+    var _b = useContext(PaystackContext), initializePayment = _b.initializePayment, onSuccess = _b.onSuccess, onClose = _b.onClose;
+    var completeInitializePayment = function () { return initializePayment(onSuccess, onClose); };
+    return children({ initializePayment: completeInitializePayment, ref: ref });
+};
+var PaystackConsumer = forwardRef(function (_a, ref) {
+    var children = _a.children, paraSuccess = _a.onSuccess, paraClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
+    var onSuccess = paraSuccess ? paraSuccess : function () { return null; };
+    var onClose = paraClose ? paraClose : function () { return null; };
+    return (React.createElement(PaystackProvider, __assign({}, others, { onSuccess: onSuccess, onClose: onClose }),
+        React.createElement(PaystackConsumerChild, { ref: ref }, children)));
+});
+
+export { PaystackButton, PaystackConsumer, usePaystackPayment };
 //# sourceMappingURL=index.es.js.map

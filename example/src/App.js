@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import { usePaystackPayment, PaystackButton } from './dist/index.es';
+import { usePaystackPayment, PaystackButton, PaystackConsumer } from './dist/index.es';
 import './App.css';
 
 const config = {
@@ -28,7 +28,6 @@ function App() {
         onSuccess: () => null,
         onClose: () => null
     };
-    console.log(componentProps);
 
   return (
     <div className="App">
@@ -48,6 +47,9 @@ function App() {
       </header>
         <PaystackHookExample />
         <PaystackButton {...componentProps} />
+        <PaystackConsumer {...componentProps} >
+            {({initializePayment}) => <button onClick={() => initializePayment()}>Use render props 2000</button>}
+        </PaystackConsumer>
     </div>
   );
 }

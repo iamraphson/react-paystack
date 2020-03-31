@@ -109,6 +109,17 @@ See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
 ***************************************************************************** */
 
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+
 function __rest(s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -127,6 +138,33 @@ var PaystackButton = function (_a) {
     return (React__default.createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
 };
 
+var PaystackContext = React.createContext({
+    initializePayment: function () { return null; },
+    onSuccess: function () { return null; },
+    onClose: function () { return null; },
+});
+
+var PaystackProvider = function (_a) {
+    var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
+    var initializePayment = usePaystackPayment(others);
+    return (React__default.createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
+};
+
+var PaystackConsumerChild = function (_a) {
+    var children = _a.children, ref = _a.ref;
+    var _b = React.useContext(PaystackContext), initializePayment = _b.initializePayment, onSuccess = _b.onSuccess, onClose = _b.onClose;
+    var completeInitializePayment = function () { return initializePayment(onSuccess, onClose); };
+    return children({ initializePayment: completeInitializePayment, ref: ref });
+};
+var PaystackConsumer = React.forwardRef(function (_a, ref) {
+    var children = _a.children, paraSuccess = _a.onSuccess, paraClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
+    var onSuccess = paraSuccess ? paraSuccess : function () { return null; };
+    var onClose = paraClose ? paraClose : function () { return null; };
+    return (React__default.createElement(PaystackProvider, __assign({}, others, { onSuccess: onSuccess, onClose: onClose }),
+        React__default.createElement(PaystackConsumerChild, { ref: ref }, children)));
+});
+
 exports.PaystackButton = PaystackButton;
+exports.PaystackConsumer = PaystackConsumer;
 exports.usePaystackPayment = usePaystackPayment;
 //# sourceMappingURL=index.js.map
