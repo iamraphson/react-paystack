@@ -8,6 +8,9 @@ export default function usePaystackPayment(
   const [scriptLoaded, scriptError] = usePaystackScript();
   const {
     publicKey,
+    firstname,
+    lastname,
+    phone,
     email,
     amount,
     reference,
@@ -34,6 +37,9 @@ export default function usePaystackPayment(
         key: publicKey,
         ref: reference,
         email,
+        firstname,
+        lastname,
+        phone,
         amount,
         currency,
         plan,
