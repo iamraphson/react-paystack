@@ -4,7 +4,7 @@ This is a react library for implementing paystack payment gateway
 
 ## Demo
 
-![Demo](React_App.png?raw=true "Demo Image")
+![Demo](React_App_01.png?raw=true "Demo Image")
 
 ## Get Started
 
@@ -25,60 +25,62 @@ yarn add react-paystack
 ### Usage
 
 ```javascript
-    import React, { Component } from 'react';
-    //import the library
-    import PaystackButton from 'react-paystack';
-
-    class App extends Component {
-
-    	state = {
-    		key: "pk_test_########################################", //PAYSTACK PUBLIC KEY
-    		email: "foobar@example.com",  // customer email
-    		amount: 10000 //equals NGN100,
-    	}
-
-    	callback = (response) => {
-    		console.log(response); // card charged successfully, get reference here
-    	}
-
-    	close = () => {
-    		console.log("Payment closed");
-    	}
-
-    	getReference = () => {
-    		//you can put any unique reference implementation code here
-    		let text = "";
-        let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-.=";
-
-    		for( let i=0; i < 15; i++ )
-    			text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    		return text;
-    	}
-
-      render() {
+    import React from 'react';
+    import logo from './logo.svg';
+    import { usePaystackPayment, PaystackButton, PaystackConsumer } from 'react-paystack';
+    import './App.css';
+    
+    const config = {
+        reference: (new Date()).getTime(),
+        email: "user@example.com",
+        amount: 20000,
+        publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
+    };
+    
+    const PaystackHookExample = () => {
+        const initializePayment = usePaystackPayment(config);
         return (
-          <div>
-            <p>
-              <PaystackButton
-                text="Make Payment"
-                className="payButton"
-                callback={this.callback}
-                close={this.close}
-                disabled={true} {/*disable payment button*/}
-                embed={true} {/*payment embed in your app instead of a pop up*/}
-                reference={this.getReference()}
-                email={this.state.email}
-                amount={this.state.amount}
-                paystackkey={this.state.key}
-                tag="button"{/*it can be button or a or input tag */}
-              />
-            </p>
-          </div>
+            <div>
+                <button onClick={() => {
+                    initializePayment()
+                }}>Paystack Hooks Implementation</button>
+            </div>
         );
-      }
+    };
+    
+    function App() {
+        const componentProps = {
+            ...config,
+            text: 'Paystack Button Implementation',
+            onSuccess: () => null,
+            onClose: () => null
+        };
+    
+      return (
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <p>
+              Edit <code>src/App.js</code> and save to reload.
+            </p>
+            <a
+              className="App-link"
+              href="https://reactjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn React
+            </a>
+          </header>
+            <PaystackHookExample />
+            <PaystackButton {...componentProps} />
+            <PaystackConsumer {...componentProps} >
+                {({initializePayment}) => <button onClick={() => initializePayment()}>Paystack Consumer Implementation</button>}
+            </PaystackConsumer>
+        </div>
+      );
     }
-
+    
     export default App;
 ```
 
