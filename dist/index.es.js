@@ -47,7 +47,6 @@ function usePaystackScript() {
     }, [src]);
     return [state.loaded, state.error];
 }
-//# sourceMappingURL=paystack-script.js.map
 
 var callPaystackPop = function (paystackArgs) {
     console.log('callPaystackPop', paystackArgs);
@@ -55,7 +54,6 @@ var callPaystackPop = function (paystackArgs) {
     var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
     handler && handler.openIframe();
 };
-//# sourceMappingURL=paystack-actions.js.map
 
 function usePaystackPayment(options) {
     var _a = usePaystackScript(), scriptLoaded = _a[0], scriptError = _a[1];
@@ -143,7 +141,6 @@ var PaystackContext = createContext({
     onSuccess: function () { return null; },
     onClose: function () { return null; },
 });
-//# sourceMappingURL=paystack-context.js.map
 
 var PaystackProvider = function (_a) {
     var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
