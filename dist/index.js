@@ -64,7 +64,7 @@ var callPaystackPop = function (paystackArgs) {
 
 function usePaystackPayment(options) {
     var _a = usePaystackScript(), scriptLoaded = _a[0], scriptError = _a[1];
-    var publicKey = options.publicKey, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j;
+    var publicKey = options.publicKey, firstname = options.firstname, lastname = options.lastname, phone = options.phone, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j;
     function initializePayment(callback, onClose) {
         if (scriptError) {
             throw new Error('Unable to load paystack inline script');
@@ -76,6 +76,9 @@ function usePaystackPayment(options) {
                 key: publicKey,
                 ref: reference,
                 email: email,
+                firstname: firstname,
+                lastname: lastname,
+                phone: phone,
                 amount: amount,
                 currency: currency,
                 plan: plan,

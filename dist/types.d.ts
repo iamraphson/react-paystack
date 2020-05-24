@@ -4,6 +4,9 @@ declare type Bearer = 'account' | 'subaccount';
 export interface PaystackProps {
     publicKey: string;
     email: string;
+    firstname?: string;
+    lastname?: string;
+    phone?: number;
     amount: number;
     reference?: string;
     metadata?: {

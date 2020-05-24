@@ -66,8 +66,10 @@ describe('usePaystackPayment()', () => {
                 subaccount: 'ACCT_olodo',
                 'data-custom-button': 'savage',
                 quantity: 2,
-                split_code: 'SPL_ehshjerjh1232343'
-
+                split_code: 'SPL_ehshjerjh1232343',
+                firstname: '404',
+                lastname: 'err',
+                phone: 080456789012
             }),
         );
         rerender();
