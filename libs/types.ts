@@ -19,4 +19,5 @@ export interface PaystackProps {
   transaction_charge?: number;
   bearer?: Bearer;
   'data-custom-button'?: string;
+  split_code?: string;
 }

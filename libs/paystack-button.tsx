@@ -17,7 +17,7 @@ const PaystackButton = ({
   onSuccess,
   onClose,
   ...others
-}: PaystackButtonProps): ReactNode => {
+}: PaystackButtonProps): JSX.Element => {
   const initializePayment = usePaystackPayment(others);
   return (
     <button className={className} onClick={(): void => initializePayment(onSuccess, onClose)}>

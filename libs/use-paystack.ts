@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {PaystackProps} from './types';
 import usePaystackScript from './paystack-script';
+import { callPaystackPop } from './paystack-actions';
 
 export default function usePaystackPayment(
   options: PaystackProps,
@@ -22,7 +23,7 @@ export default function usePaystackPayment(
     bearer = 'account',
   } = options;
 
-  const initializePayment = (callback?: Function, onClose?: Function): void => {
+  function initializePayment(callback?: Function, onClose?: Function): void{
     if (scriptError) {
       throw new Error('Unable to load paystack inline script');
     }
@@ -46,10 +47,7 @@ export default function usePaystackPayment(
         label,
         metadata,
       };
-
-      //@ts-ignore
-      const handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
-      handler && handler.openIframe();
+      callPaystackPop(paystackArgs);
     }
   };
 

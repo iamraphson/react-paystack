@@ -54,11 +54,20 @@ function usePaystackScript() {
     }, [src]);
     return [state.loaded, state.error];
 }
+//# sourceMappingURL=paystack-script.js.map
+
+var callPaystackPop = function (paystackArgs) {
+    console.log('callPaystackPop', paystackArgs);
+    //@ts-ignore
+    var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
+    handler && handler.openIframe();
+};
+//# sourceMappingURL=paystack-actions.js.map
 
 function usePaystackPayment(options) {
     var _a = usePaystackScript(), scriptLoaded = _a[0], scriptError = _a[1];
     var publicKey = options.publicKey, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j;
-    var initializePayment = function (callback, onClose) {
+    function initializePayment(callback, onClose) {
         if (scriptError) {
             throw new Error('Unable to load paystack inline script');
         }
@@ -81,11 +90,9 @@ function usePaystackPayment(options) {
                 label: label,
                 metadata: metadata,
             };
-            //@ts-ignore
-            var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
-            handler && handler.openIframe();
+            callPaystackPop(paystackArgs);
         }
-    };
+    }
     React.useEffect(function () {
         if (scriptError) {
             throw new Error('Unable to load paystack inline script');
@@ -143,6 +150,7 @@ var PaystackContext = React.createContext({
     onSuccess: function () { return null; },
     onClose: function () { return null; },
 });
+//# sourceMappingURL=paystack-context.js.map
 
 var PaystackProvider = function (_a) {
     var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
