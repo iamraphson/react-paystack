@@ -1,12 +1,13 @@
 declare type Currency = 'NGN' | 'GHS' | 'USD';
 declare type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
 declare type Bearer = 'account' | 'subaccount';
+declare type phone = number | string;
 export interface PaystackProps {
     publicKey: string;
     email: string;
     firstname?: string;
     lastname?: string;
-    phone?: number;
+    phone?: phone;
     amount: number;
     reference?: string;
     metadata?: {

@@ -54,9 +54,9 @@ describe('usePaystackPayment()', () => {
                 metadata: {
                     custom_field: [
                         {
-                            display_name: "Mobile Number",
-                            variable_name: "mobile_number",
-                            value: "+2348012345678"
+                            display_name: 'Mobile Number',
+                            variable_name: 'mobile_number',
+                            value: '2348012345678'
                         }
                     ]
                 },
@@ -69,7 +69,7 @@ describe('usePaystackPayment()', () => {
                 split_code: 'SPL_ehshjerjh1232343',
                 firstname: '404',
                 lastname: 'err',
-                phone: 080456789012
+                phone: '080456789012'
             }),
         );
         rerender();

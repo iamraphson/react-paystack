@@ -4,12 +4,14 @@ type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
 
 type Bearer = 'account' | 'subaccount';
 
+type phone = number | string;
+
 export interface PaystackProps {
   publicKey: string;
   email: string;
   firstname?: string;
   lastname?: string;
-  phone?: number;
+  phone?: phone;
   amount: number;
   reference?: string;
   metadata?: {custom_field: Record<string, string>[]};

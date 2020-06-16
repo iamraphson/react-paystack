@@ -49,7 +49,6 @@ function usePaystackScript() {
 }
 
 var callPaystackPop = function (paystackArgs) {
-    console.log('callPaystackPop', paystackArgs);
     //@ts-ignore
     var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
     handler && handler.openIframe();
