@@ -70,13 +70,6 @@ Note that all 3 implementations produce the same results.
   };
   
   function App() {
-      const componentProps = {
-          ...config,
-          text: 'Paystack Button Implementation',
-          onSuccess: () => onClose(),
-          onClose: () => onSuccess(),
-      };
-  
     return (
       <div className="App">
         <header className="App-header">
