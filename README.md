@@ -32,7 +32,7 @@ This library can be implemented into any react application in 3 different ways:
 Note that all 3 implementations produce the same results.
 
 
-### 1. Using Hooks
+### 1. Using the paystack hook
 ```javascript
   import React from 'react';
   import logo from './logo.svg';
@@ -154,7 +154,7 @@ Note that all 3 implementations produce the same results.
   export default App;
 ```
 
-### 3. using the context consumer
+### 3. using the Paystack consumer
 ``` Javascript
 import React from 'react';
 import logo from './logo.svg';
@@ -168,12 +168,14 @@ import './App.css';
       publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
   };
   
-  const onSuccess = (reference) => {
+  // you can call this function anything
+  const handleSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
     console.log(reference);
   };
 
-  const onClose = () => {
+  // you can call this function anything
+  const handleClose = () => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
     console.log('closed')
   }
@@ -182,8 +184,8 @@ import './App.css';
       const componentProps = {
           ...config,
           text: 'Paystack Button Implementation',
-          onSuccess: () => null,
-          onClose: () => null
+          onSuccess: (reference) => handleSuccess(reference),
+          onClose: handleClose
       };
   
     return (
@@ -203,7 +205,7 @@ import './App.css';
           </a>
         </header>
         <PaystackConsumer {...componentProps} >
-          {({initializePayment}) => <button onClick={() => initializePayment(onSuccess, onClose)}>Paystack Consumer Implementation</button>}
+          {({initializePayment}) => <button onClick={() => initializePayment(handleSuccess, handleClose)}>Paystack Consumer Implementation</button>}
         </PaystackConsumer>
       </div>
     );
