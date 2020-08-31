@@ -127,7 +127,7 @@ Note that all 3 implementations produce the same results.
         ...config,
         text: 'Paystack Button Implementation',
         onSuccess: (reference) => handlePaystackSuccessAction(reference),
-        onClose: () => handlePaystackCloseAction(),
+        onClose: handlePaystackCloseAction,
     };
 
     return (
