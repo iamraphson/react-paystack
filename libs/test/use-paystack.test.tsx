@@ -70,6 +70,20 @@ describe('usePaystackPayment()', () => {
         firstname: '404',
         lastname: 'err',
         phone: '080456789012',
+        split: {
+          type: 'percentage',
+          bearer_type: 'all-proportional',
+          subaccounts: [
+            {
+              subaccount: 'ACCT_hhs519xgrbocdtr',
+              share: 30,
+            },
+            {
+              subaccount: 'ACCT_fpzizqxofyshxs5',
+              share: 20,
+            },
+          ],
+        },
       }),
     );
     rerender();

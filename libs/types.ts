@@ -25,4 +25,5 @@ export interface PaystackProps {
   bearer?: Bearer;
   'data-custom-button'?: string;
   split_code?: string;
+  split?: Record<string, any>;
 }

@@ -7,9 +7,23 @@ const config = {
     reference: (new Date()).getTime(),
     email: "user@example.com",
     amount: 20000,
-    publicKey: 'pk_test_deea911dsamnfdknerkhfkrwni239823erwlmqqaADF',
+    publicKey: 'pk_live_9444ee2309d44aasdd3c9dc417fe56d6c9f72f0071',
     firstname: 'cool',
-    lastname: 'story'
+    lastname: 'story',
+    split: { //if you want to use transaction split
+        "type": "percentage",
+        "bearer_type": "all",
+        "subaccounts": [
+            {
+                "subaccount": "ACCT_mtl3xzwjfhcldkw",
+                "share": 30
+            },
+            {
+                "subaccount": "ACCT_y19ht107y44o294",
+                "share": 20
+            }
+        ]
+    }
 };
 
 const onSuccess = (reference) => {

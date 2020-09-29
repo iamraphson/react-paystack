@@ -24,6 +24,8 @@ export default function usePaystackPayment(
     subaccount = '',
     transaction_charge = 0,
     bearer = 'account',
+    split,
+    split_code,
   } = options;
 
   function initializePayment(callback?: Function, onClose?: Function): void {
@@ -52,6 +54,8 @@ export default function usePaystackPayment(
         bearer,
         label,
         metadata,
+        split,
+        split_code,
       };
       callPaystackPop(paystackArgs);
     }

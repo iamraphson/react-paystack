@@ -2,10 +2,11 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
-
 var React = require('react');
-var React__default = _interopDefault(React);
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var cachedScripts = [];
 function usePaystackScript() {
@@ -63,7 +64,7 @@ var callPaystackPop = function (paystackArgs) {
 
 function usePaystackPayment(options) {
     var _a = usePaystackScript(), scriptLoaded = _a[0], scriptError = _a[1];
-    var publicKey = options.publicKey, firstname = options.firstname, lastname = options.lastname, phone = options.phone, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j;
+    var publicKey = options.publicKey, firstname = options.firstname, lastname = options.lastname, phone = options.phone, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j, split = options.split, split_code = options.split_code;
     function initializePayment(callback, onClose) {
         if (scriptError) {
             throw new Error('Unable to load paystack inline script');
@@ -89,6 +90,8 @@ function usePaystackPayment(options) {
                 bearer: bearer,
                 label: label,
                 metadata: metadata,
+                split: split,
+                split_code: split_code,
             };
             callPaystackPop(paystackArgs);
         }
@@ -102,18 +105,18 @@ function usePaystackPayment(options) {
 }
 
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
+Copyright (c) Microsoft Corporation.
 
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
 var __assign = function() {
@@ -142,7 +145,7 @@ function __rest(s, e) {
 var PaystackButton = function (_a) {
     var text = _a.text, className = _a.className, children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["text", "className", "children", "onSuccess", "onClose"]);
     var initializePayment = usePaystackPayment(others);
-    return (React__default.createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
+    return (React__default['default'].createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
 };
 
 var PaystackContext = React.createContext({
@@ -154,7 +157,7 @@ var PaystackContext = React.createContext({
 var PaystackProvider = function (_a) {
     var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
     var initializePayment = usePaystackPayment(others);
-    return (React__default.createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
+    return (React__default['default'].createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
 };
 
 var PaystackConsumerChild = function (_a) {
@@ -167,8 +170,8 @@ var PaystackConsumer = React.forwardRef(function (_a, ref) {
     var children = _a.children, paraSuccess = _a.onSuccess, paraClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
     var onSuccess = paraSuccess ? paraSuccess : function () { return null; };
     var onClose = paraClose ? paraClose : function () { return null; };
-    return (React__default.createElement(PaystackProvider, __assign({}, others, { onSuccess: onSuccess, onClose: onClose }),
-        React__default.createElement(PaystackConsumerChild, { ref: ref }, children)));
+    return (React__default['default'].createElement(PaystackProvider, __assign({}, others, { onSuccess: onSuccess, onClose: onClose }),
+        React__default['default'].createElement(PaystackConsumerChild, { ref: ref }, children)));
 });
 
 exports.PaystackButton = PaystackButton;

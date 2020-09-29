@@ -47,12 +47,17 @@ function usePaystackScript() {
     }, [src]);
     return [state.loaded, state.error];
 }
-//# sourceMappingURL=paystack-script.js.map
+
+var callPaystackPop = function (paystackArgs) {
+    //@ts-ignore
+    var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
+    handler && handler.openIframe();
+};
 
 function usePaystackPayment(options) {
     var _a = usePaystackScript(), scriptLoaded = _a[0], scriptError = _a[1];
-    var publicKey = options.publicKey, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j;
-    var initializePayment = function (callback, onClose) {
+    var publicKey = options.publicKey, firstname = options.firstname, lastname = options.lastname, phone = options.phone, email = options.email, amount = options.amount, reference = options.reference, _b = options.metadata, metadata = _b === void 0 ? {} : _b, _c = options.currency, currency = _c === void 0 ? 'NGN' : _c, channels = options.channels, _d = options.label, label = _d === void 0 ? '' : _d, _e = options.plan, plan = _e === void 0 ? '' : _e, _f = options.quantity, quantity = _f === void 0 ? '' : _f, _g = options.subaccount, subaccount = _g === void 0 ? '' : _g, _h = options.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = options.bearer, bearer = _j === void 0 ? 'account' : _j, split = options.split, split_code = options.split_code;
+    function initializePayment(callback, onClose) {
         if (scriptError) {
             throw new Error('Unable to load paystack inline script');
         }
@@ -63,6 +68,9 @@ function usePaystackPayment(options) {
                 key: publicKey,
                 ref: reference,
                 email: email,
+                firstname: firstname,
+                lastname: lastname,
+                phone: phone,
                 amount: amount,
                 currency: currency,
                 plan: plan,
@@ -74,12 +82,12 @@ function usePaystackPayment(options) {
                 bearer: bearer,
                 label: label,
                 metadata: metadata,
+                split: split,
+                split_code: split_code,
             };
-            //@ts-ignore
-            var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
-            handler && handler.openIframe();
+            callPaystackPop(paystackArgs);
         }
-    };
+    }
     useEffect(function () {
         if (scriptError) {
             throw new Error('Unable to load paystack inline script');
@@ -87,21 +95,20 @@ function usePaystackPayment(options) {
     }, [scriptError]);
     return initializePayment;
 }
-//# sourceMappingURL=use-paystack.js.map
 
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
+Copyright (c) Microsoft Corporation.
 
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
 var __assign = function() {
@@ -132,21 +139,18 @@ var PaystackButton = function (_a) {
     var initializePayment = usePaystackPayment(others);
     return (React.createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
 };
-//# sourceMappingURL=paystack-button.js.map
 
 var PaystackContext = createContext({
     initializePayment: function () { return null; },
     onSuccess: function () { return null; },
     onClose: function () { return null; },
 });
-//# sourceMappingURL=paystack-context.js.map
 
 var PaystackProvider = function (_a) {
     var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
     var initializePayment = usePaystackPayment(others);
     return (React.createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
 };
-//# sourceMappingURL=paystack-provider.js.map
 
 var PaystackConsumerChild = function (_a) {
     var children = _a.children, ref = _a.ref;
