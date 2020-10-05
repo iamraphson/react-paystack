@@ -24,64 +24,194 @@ yarn add react-paystack
 
 ### Usage
 
+This library can be implemented into any react application in 3 different ways:
+1. By using hooks provided by the library
+2. By using a button provided by the library
+3. By using a context consumer provided by the library
+
+Note that all 3 implementations produce the same results.
+
+
+### 1. Using the paystack hook
 ```javascript
-    import React from 'react';
-    import logo from './logo.svg';
-    import { usePaystackPayment, PaystackButton, PaystackConsumer } from 'react-paystack';
-    import './App.css';
-    
-    const config = {
-        reference: (new Date()).getTime(),
-        email: "user@example.com",
-        amount: 20000,
-        publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
-    };
-    
-    const PaystackHookExample = () => {
-        const initializePayment = usePaystackPayment(config);
-        return (
-            <div>
-                <button onClick={() => {
-                    initializePayment()
-                }}>Paystack Hooks Implementation</button>
-            </div>
-        );
-    };
-    
-    function App() {
-        const componentProps = {
-            ...config,
-            text: 'Paystack Button Implementation',
-            onSuccess: () => null,
-            onClose: () => null
-        };
-    
+  import React from 'react';
+  import logo from './logo.svg';
+  import { usePaystackPayment } from 'react-paystack';
+  import './App.css';
+  
+  const config = {
+      reference: (new Date()).getTime(),
+      email: "user@example.com",
+      amount: 20000,
+      publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
+  };
+  
+  // you can call this function anything
+  const onSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    console.log(reference);
+  };
+
+  // you can call this function anything
+  const onClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log('closed')
+  }
+
+  const PaystackHookExample = () => {
+      const initializePayment = usePaystackPayment(config);
       return (
-        <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
-            <PaystackHookExample />
-            <PaystackButton {...componentProps} />
-            <PaystackConsumer {...componentProps} >
-                {({initializePayment}) => <button onClick={() => initializePayment()}>Paystack Consumer Implementation</button>}
-            </PaystackConsumer>
+        <div>
+            <button onClick={() => {
+                initializePayment(onSuccess, onClose)
+            }}>Paystack Hooks Implementation</button>
         </div>
       );
+  };
+  
+  function App() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+        <PaystackHookExample />
+      </div>
+    );
+  }
+  
+  export default App;
+```
+
+
+### 2. Using the paystack button
+
+``` javascript 
+  import React from 'react';
+  import logo from './logo.svg';
+  import { PaystackButton } from 'react-paystack';
+  import './App.css';
+  
+  const config = {
+    reference: (new Date()).getTime(),
+    email: "user@example.com",
+    amount: 20000,
+    publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
+  };
+  
+  function App() {
+    // you can call this function anything
+    const handlePaystackSuccessAction = (reference) => {
+      // Implementation for whatever you want to do with reference and after success call.
+      console.log(reference);
+    };
+
+    // you can call this function anything
+    const handlePaystackCloseAction = () => {
+      // implementation for  whatever you want to do when the Paystack dialog closed.
+      console.log('closed')
     }
-    
-    export default App;
+
+    const componentProps = {
+        ...config,
+        text: 'Paystack Button Implementation',
+        onSuccess: (reference) => handlePaystackSuccessAction(reference),
+        onClose: handlePaystackCloseAction,
+    };
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+        <PaystackButton {...componentProps} />
+      </div>
+    );
+  }
+  
+  export default App;
+```
+
+### 3. using the Paystack consumer
+``` Javascript
+import React from 'react';
+import logo from './logo.svg';
+import { PaystackConsumer } from 'react-paystack';
+import './App.css';
+  
+  const config = {
+      reference: (new Date()).getTime(),
+      email: "user@example.com",
+      amount: 20000,
+      publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
+  };
+  
+  // you can call this function anything
+  const handleSuccess = (reference) => {
+    // Implementation for whatever you want to do with reference and after success call.
+    console.log(reference);
+  };
+
+  // you can call this function anything
+  const handleClose = () => {
+    // implementation for  whatever you want to do when the Paystack dialog closed.
+    console.log('closed')
+  }
+
+  function App() {
+      const componentProps = {
+          ...config,
+          text: 'Paystack Button Implementation',
+          onSuccess: (reference) => handleSuccess(reference),
+          onClose: handleClose
+      };
+  
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+        <PaystackConsumer {...componentProps} >
+          {({initializePayment}) => <button onClick={() => initializePayment(handleSuccess, handleClose)}>Paystack Consumer Implementation</button>}
+        </PaystackConsumer>
+      </div>
+    );
+  }
+  
+  export default App;
 ```
 
 Please checkout [Paystack Documentation](https://developers.paystack.co/docs/paystack-inline) for other available options you can add to the tag
