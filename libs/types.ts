@@ -1,4 +1,4 @@
-type Currency = 'NGN' | 'GHS' | 'USD';
+type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
 
 type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
 
