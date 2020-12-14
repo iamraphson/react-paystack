@@ -1,4 +1,4 @@
-declare type Currency = 'NGN' | 'GHS' | 'USD';
+declare type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
 declare type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
 declare type Bearer = 'account' | 'subaccount';
 declare type phone = number | string;
