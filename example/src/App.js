@@ -4,56 +4,56 @@ import { usePaystackPayment, PaystackButton, PaystackConsumer } from './dist/ind
 import './App.css';
 
 const config = {
-    reference: (new Date()).getTime(),
-    email: "user@example.com",
-    amount: 20000,
-    publicKey: 'pk_live_9444ee2309d44aasdd3c9dc417fe56d6c9f72f0071',
-    firstname: 'cool',
-    lastname: 'story',
-    split: { //if you want to use transaction split
-        "type": "percentage",
-        "bearer_type": "all",
-        "subaccounts": [
-            {
-                "subaccount": "ACCT_mtl3xzwjfhcldkw",
-                "share": 30
-            },
-            {
-                "subaccount": "ACCT_y19ht107y44o294",
-                "share": 20
-            }
-        ]
-    }
+  reference: (new Date()).getTime().toString(),
+  email: "user@example.com",
+  amount: 20000,
+  publicKey: 'pk_live_9444ee2309d44aasdd3c9dc417fe56d6c9f72f0071',
+  firstname: 'cool',
+  lastname: 'story',
+  split: { //if you want to use transaction split
+    "type": "percentage",
+    "bearer_type": "all",
+    "subaccounts": [
+      {
+        "subaccount": "ACCT_mtl3xzwjfhcldkw",
+        "share": 30
+      },
+      {
+        "subaccount": "ACCT_y19ht107y44o294",
+        "share": 20
+      }
+    ]
+  }
 };
 
 const onSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
+  // Implementation for whatever you want to do with reference and after success call.
+  console.log(reference);
 };
 
 const onClose = () => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.log('closed')
+  // implementation for  whatever you want to do when the Paystack dialog closed.
+  console.log('closed')
 }
 
 const PaystackHookExample = () => {
-    const initializePayment = usePaystackPayment(config);
-    return (
-        <div>
-            <button onClick={() => {
-                initializePayment(onSuccess, onClose)
-            }}>Paystack Hooks Implementation</button>
-        </div>
-    );
+  const initializePayment = usePaystackPayment(config);
+  return (
+    <div>
+      <button onClick={() => {
+        initializePayment(onSuccess, onClose)
+      }}>Paystack Hooks Implementation</button>
+    </div>
+  );
 };
 
 function App() {
-    const componentProps = {
-        ...config,
-        text: 'Paystack Button Implementation',
-        onSuccess,
-        onClose
-    };
+  const componentProps = {
+    ...config,
+    text: 'Paystack Button Implementation',
+    onSuccess,
+    onClose
+  };
 
   return (
     <div className="App">
@@ -71,11 +71,11 @@ function App() {
           Learn React
         </a>
       </header>
-        <PaystackHookExample />
-        <PaystackButton {...componentProps} />
-        <PaystackConsumer {...componentProps} >
-            {({initializePayment}) => <button onClick={() => initializePayment()}>Paystack Consumer Implementation</button>}
-        </PaystackConsumer>
+      <PaystackHookExample />
+      <PaystackButton {...componentProps} />
+      <PaystackConsumer {...componentProps} >
+        {({ initializePayment }) => <button onClick={() => initializePayment()}>Paystack Consumer Implementation</button>}
+      </PaystackConsumer>
     </div>
   );
 }
