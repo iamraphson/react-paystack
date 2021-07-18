@@ -12,8 +12,8 @@ jest.mock('../paystack-actions');
 const componentProps = {
   ...config,
   text: 'Pay my damn money',
-  onSuccess: () => null,
-  onClose: () => null,
+  onSuccess: (): any => null,
+  onClose: (): any => null,
 };
 
 describe('<PaystackProvider />', () => {
@@ -31,8 +31,8 @@ describe('<PaystackProvider />', () => {
   it('render PaystackProvider', () => {
     const tree = (
       <PaystackConsumer {...componentProps}>
-        {({initializePayment}: Record<string, any>) => (
-          <button onClick={() => initializePayment()}>Use render props 2000</button>
+        {({initializePayment}: Record<string, any>): JSX.Element => (
+          <button onClick={(): void => initializePayment()}>Use render props 2000</button>
         )}
       </PaystackConsumer>
     );

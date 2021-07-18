@@ -52,13 +52,14 @@ describe('usePaystackPayment()', () => {
       usePaystackPayment({
         ...config,
         metadata: {
-          custom_field: [
+          custom_fields: [
             {
               display_name: 'Mobile Number',
               variable_name: 'mobile_number',
               value: '2348012345678',
             },
           ],
+          cart_id: 398,
         },
         currency: 'GHS',
         channels: ['mobile_money', 'ussd'],

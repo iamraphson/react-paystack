@@ -40,7 +40,7 @@ Note that all 3 implementations produce the same results.
   import './App.css';
   
   const config = {
-      reference: (new Date()).getTime(),
+      reference: (new Date()).getTime().toString(),
       email: "user@example.com",
       amount: 20000,
       publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
@@ -104,7 +104,7 @@ Note that all 3 implementations produce the same results.
   import './App.css';
   
   const config = {
-    reference: (new Date()).getTime(),
+    reference: (new Date()).getTime().toString(),
     email: "user@example.com",
     amount: 20000,
     publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
@@ -162,7 +162,7 @@ import { PaystackConsumer } from 'react-paystack';
 import './App.css';
   
   const config = {
-      reference: (new Date()).getTime(),
+      reference: (new Date()).getTime().toString(),
       email: "user@example.com",
       amount: 20000,
       publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',

@@ -6,6 +6,20 @@ type Bearer = 'account' | 'subaccount';
 
 type phone = number | string;
 
+interface PaystackCustomFields {
+  display_name: string;
+  variable_name: string;
+  value: any;
+}
+
+interface PaystackMetadata {
+  custom_fields: PaystackCustomFields[];
+}
+
+interface PaystackMetadata {
+  [key: string]: any;
+}
+
 export interface PaystackProps {
   publicKey: string;
   email: string;
@@ -14,7 +28,7 @@ export interface PaystackProps {
   phone?: phone;
   amount: number;
   reference?: string;
-  metadata?: {custom_field: Record<string, string>[]};
+  metadata?: PaystackMetadata;
   currency?: Currency;
   channels?: PaymentChannels[];
   label?: string;

@@ -13,8 +13,8 @@ const componentProps = {
   ...config,
   className: 'btn',
   text: 'Pay my damn money',
-  onSuccess: () => null,
-  onClose: () => null,
+  onSuccess: (): any => null,
+  onClose: (): any => null,
 };
 
 describe('<PaystackButton />', () => {
