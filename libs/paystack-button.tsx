@@ -1,13 +1,13 @@
 import React, {ReactNode} from 'react';
 import usePaystackPayment from './use-paystack';
-import {PaystackProps} from './types';
+import {callback, PaystackProps} from './types';
 
 interface PaystackButtonProps extends PaystackProps {
   text?: string;
   className?: string;
   children?: ReactNode;
-  onSuccess?: Function;
-  onClose?: Function;
+  onSuccess?: callback;
+  onClose?: callback;
 }
 
 const PaystackButton = ({

@@ -1,12 +1,12 @@
 import React from 'react';
 import PaystackContext from './paystack-context';
 import usePaystackPayment from './use-paystack';
-import {PaystackProps} from './types';
+import {callback, PaystackProps} from './types';
 
 interface PaystackProviderProps extends PaystackProps {
   children: JSX.Element;
-  onSuccess: Function;
-  onClose: Function;
+  onSuccess: callback;
+  onClose: callback;
 }
 
 const PaystackProvider = ({

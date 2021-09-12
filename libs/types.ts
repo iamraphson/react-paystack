@@ -20,6 +20,8 @@ interface PaystackMetadata {
   [key: string]: any;
 }
 
+export type callback = () => void;
+
 export interface PaystackProps {
   publicKey: string;
   email: string;

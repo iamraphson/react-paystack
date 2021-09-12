@@ -7,9 +7,10 @@ extends:
   - "plugin:@typescript-eslint/eslint-recommended"
   - "plugin:@typescript-eslint/recommended"
   - "plugin:prettier/recommended"
-  - "prettier/react"
-  - "prettier/@typescript-eslint"
   - "plugin:jest/recommended"
+  - "prettier"
+  - "plugin:react/recommended"
+  - "plugin:react/recommended"
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
@@ -29,5 +30,6 @@ rules: {
   "@typescript-eslint/camelcase": "off",
   "@typescript-eslint/no-unused-vars": "off",
   "@typescript-eslint/ban-ts-ignore": "off",
-  "@typescript-eslint/interface-name-prefix": "off"
+  "@typescript-eslint/interface-name-prefix": "off",
+  "@typescript-eslint/ban-ts-comment": "off",
 }

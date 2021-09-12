@@ -4,16 +4,16 @@ import {PaystackProps} from './types';
 import PaystackContext from './paystack-context';
 
 interface PaystacConsumerProps extends PaystackProps {
-  children: Function;
-  onSuccess?: Function;
-  onClose?: Function;
+  children: () => void;
+  onSuccess?: () => void;
+  onClose?: () => void;
 }
 
 const PaystackConsumerChild = ({
   children,
   ref,
 }: {
-  children: Function;
+  children: any;
   ref: any;
 }): FunctionComponentElement<any> => {
   const {initializePayment, onSuccess, onClose} = useContext(PaystackContext);
@@ -21,6 +21,7 @@ const PaystackConsumerChild = ({
   return children({initializePayment: completeInitializePayment, ref});
 };
 
+// eslint-disable-next-line react/display-name
 const PaystackConsumer = forwardRef(
   (
     {children, onSuccess: paraSuccess, onClose: paraClose, ...others}: PaystacConsumerProps,

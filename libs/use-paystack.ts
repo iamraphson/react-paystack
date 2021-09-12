@@ -1,11 +1,11 @@
 import {useEffect} from 'react';
-import {PaystackProps} from './types';
+import {callback, PaystackProps} from './types';
 import usePaystackScript from './paystack-script';
 import {callPaystackPop} from './paystack-actions';
 
 export default function usePaystackPayment(
   options: PaystackProps,
-): (callback?: Function, onClose?: Function) => void {
+): (callback?: () => void, onClose?: () => void) => void {
   const [scriptLoaded, scriptError] = usePaystackScript();
   const {
     publicKey,
@@ -28,15 +28,15 @@ export default function usePaystackPayment(
     split_code,
   } = options;
 
-  function initializePayment(callback?: Function, onClose?: Function): void {
+  function initializePayment(callback?: callback, onClose?: callback): void {
     if (scriptError) {
       throw new Error('Unable to load paystack inline script');
     }
 
     if (scriptLoaded) {
       const paystackArgs: Record<string, any> = {
-        callback: callback ? callback : (): any => null,
-        onClose: onClose ? onClose : (): any => null,
+        callback: callback ? callback : () => null,
+        onClose: onClose ? onClose : () => null,
         key: publicKey,
         ref: reference,
         email,
