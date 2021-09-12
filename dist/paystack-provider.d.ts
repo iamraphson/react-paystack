@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { PaystackProps } from './types';
 interface PaystackProviderProps extends PaystackProps {
     children: JSX.Element;

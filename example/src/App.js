@@ -7,7 +7,7 @@ const config = {
     reference: (new Date()).getTime().toString(),
     email: "user@example.com",
     amount: 20000,
-    publicKey: 'pk_live_9444ee2309d44aasdd3c9dc417fe56d6c9f72f0071',
+    publicKey: 'pk_live_9555ee2309d44add3c9dc417fe56d6c9f72f0082',
     firstname: 'cool',
     lastname: 'story',
     split: { //if you want to use transaction split
