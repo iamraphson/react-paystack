@@ -4,7 +4,7 @@ import {PaystackProps} from './types';
 import PaystackContext from './paystack-context';
 
 interface PaystacConsumerProps extends PaystackProps {
-  children: () => void;
+  children: (arg: Record<string, any>) => any;
   onSuccess?: () => void;
   onClose?: () => void;
 }
