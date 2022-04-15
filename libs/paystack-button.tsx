@@ -1,4 +1,4 @@
-// import React, {ReactNode} from 'react';
+import React, {ReactNode} from 'react';
 import usePaystackPayment from './use-paystack';
 import {callback, PaystackProps} from './types';
 
