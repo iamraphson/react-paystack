@@ -235,7 +235,7 @@ Why not star the github repo? I'd love the attention! Why not share the link for
 Don't forget to [follow me on twitter](https://twitter.com/iamraphson)!
 
 Thanks!
-Ayeni Olusegun.
+Olusegun Ayeni.
 
 ## License
 
