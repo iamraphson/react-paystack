@@ -13,6 +13,7 @@ interface PaystackMetadata {
 interface PaystackMetadata {
     [key: string]: any;
 }
+export declare type callback = () => void;
 export interface PaystackProps {
     publicKey: string;
     email: string;

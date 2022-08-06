@@ -49,7 +49,7 @@ function usePaystackScript() {
 }
 
 var callPaystackPop = function (paystackArgs) {
-    //@ts-ignore
+    // @ts-ignore
     var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
     handler && handler.openIframe();
 };
@@ -96,7 +96,7 @@ function usePaystackPayment(options) {
     return initializePayment;
 }
 
-/*! *****************************************************************************
+/******************************************************************************
 Copyright (c) Microsoft Corporation.
 
 Permission to use, copy, modify, and/or distribute this software for any
@@ -158,6 +158,7 @@ var PaystackConsumerChild = function (_a) {
     var completeInitializePayment = function () { return initializePayment(onSuccess, onClose); };
     return children({ initializePayment: completeInitializePayment, ref: ref });
 };
+// eslint-disable-next-line react/display-name
 var PaystackConsumer = forwardRef(function (_a, ref) {
     var children = _a.children, paraSuccess = _a.onSuccess, paraClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
     var onSuccess = paraSuccess ? paraSuccess : function () { return null; };

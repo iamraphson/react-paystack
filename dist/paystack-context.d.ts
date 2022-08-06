@@ -1,8 +1,9 @@
 /// <reference types="react" />
+import { callback } from './types';
 declare type IPaystackContext = {
-    initializePayment: Function;
-    onSuccess: Function;
-    onClose: Function;
+    initializePayment: (arg0: callback, arg1: callback) => void;
+    onSuccess: () => void;
+    onClose: () => void;
 };
 declare const PaystackContext: import("react").Context<IPaystackContext>;
 export default PaystackContext;
