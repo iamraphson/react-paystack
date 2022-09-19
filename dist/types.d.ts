@@ -8,9 +8,6 @@ interface PaystackCustomFields {
     value: any;
 }
 interface PaystackMetadata {
-    custom_fields: PaystackCustomFields[];
-}
-interface PaystackMetadata {
     [key: string]: any;
 }
 export declare type callback = () => void;
