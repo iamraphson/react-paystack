@@ -42,7 +42,7 @@ Note that all 3 implementations produce the same results.
   const config = {
       reference: (new Date()).getTime().toString(),
       email: "user@example.com",
-      amount: 20000,
+      amount: 20000, //Amount is in the country lowest currency. E.g Kobo, so 20000 kobo = N200
       publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
   };
   
@@ -106,7 +106,7 @@ Note that all 3 implementations produce the same results.
   const config = {
     reference: (new Date()).getTime().toString(),
     email: "user@example.com",
-    amount: 20000,
+    amount: 20000, //Amount is in the country lowest currency. E.g Kobo, so 20000 kobo = N200
     publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
   };
   
@@ -164,7 +164,7 @@ import './App.css';
   const config = {
       reference: (new Date()).getTime().toString(),
       email: "user@example.com",
-      amount: 20000,
+      amount: 20000, //Amount is in the country lowest currency. E.g Kobo, so 20000 kobo = N200
       publicKey: 'pk_test_dsdfghuytfd2345678gvxxxxxxxxxx',
   };
   
