@@ -1,6 +1,14 @@
 type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES' | 'XOF';
 
-type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'eft' | 'bank_transfer' | 'payattitude';
+type PaymentChannels =
+  | 'bank'
+  | 'card'
+  | 'qr'
+  | 'ussd'
+  | 'mobile_money'
+  | 'eft'
+  | 'bank_transfer'
+  | 'payattitude';
 
 type Bearer = 'account' | 'subaccount';
 
