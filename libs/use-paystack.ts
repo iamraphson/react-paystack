@@ -5,7 +5,7 @@ import {callPaystackPop} from './paystack-actions';
 
 export default function usePaystackPayment(
   options: PaystackProps,
-): (callback?: () => void, onClose?: () => void) => void {
+): (callback?: callback, onClose?: callback) => void {
   const [scriptLoaded, scriptError] = usePaystackScript();
   const {
     publicKey,
