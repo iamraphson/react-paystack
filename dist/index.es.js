@@ -48,6 +48,7 @@ function usePaystackScript() {
     return [state.loaded, state.error];
 }
 
+/* eslint-disable */
 var callPaystackPop = function (paystackArgs) {
     // @ts-ignore
     var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);

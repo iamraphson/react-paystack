@@ -1,7 +1,7 @@
-declare type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
-declare type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money';
-declare type Bearer = 'account' | 'subaccount';
-declare type phone = number | string;
+type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES' | 'XOF';
+type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'eft' | 'bank_transfer' | 'payattitude';
+type Bearer = 'account' | 'subaccount';
+type phone = number | string;
 interface PaystackCustomFields {
     display_name: string;
     variable_name: string;
@@ -13,7 +13,7 @@ interface PaystackMetadata {
 interface PaystackMetadata {
     [key: string]: any;
 }
-export declare type callback = () => void;
+export type callback = (response?: any) => void;
 export interface PaystackProps {
     publicKey: string;
     email: string;

@@ -7,10 +7,10 @@ const config = {
     reference: (new Date()).getTime().toString(),
     email: "user@example.com",
     amount: 20000,
-    publicKey: 'pk_live_9555ee2309d44add3c9dc417fe56d6c9f72f0082',
+    publicKey: 'pk_test_a137d402b5975716e89952a898aad2832c961d69',
     firstname: 'cool',
     lastname: 'story',
-    split: { //if you want to use transaction split
+    /*split: { //if you want to use transaction split
         "type": "percentage",
         "bearer_type": "all",
         "subaccounts": [
@@ -23,12 +23,12 @@ const config = {
                 "share": 20
             }
         ]
-    }
+    }*/
 };
 
 const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
+    console.log('reference',reference);
 };
 
 const onClose = () => {

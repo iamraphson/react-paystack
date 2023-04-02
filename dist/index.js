@@ -1,12 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var React = require('react');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 var cachedScripts = [];
 function usePaystackScript() {
@@ -56,6 +50,7 @@ function usePaystackScript() {
     return [state.loaded, state.error];
 }
 
+/* eslint-disable */
 var callPaystackPop = function (paystackArgs) {
     // @ts-ignore
     var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
@@ -145,7 +140,7 @@ function __rest(s, e) {
 var PaystackButton = function (_a) {
     var text = _a.text, className = _a.className, children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["text", "className", "children", "onSuccess", "onClose"]);
     var initializePayment = usePaystackPayment(others);
-    return (React__default["default"].createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
+    return (React.createElement("button", { className: className, onClick: function () { return initializePayment(onSuccess, onClose); } }, text || children));
 };
 
 var PaystackContext = React.createContext({
@@ -157,7 +152,7 @@ var PaystackContext = React.createContext({
 var PaystackProvider = function (_a) {
     var children = _a.children, onSuccess = _a.onSuccess, onClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
     var initializePayment = usePaystackPayment(others);
-    return (React__default["default"].createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
+    return (React.createElement(PaystackContext.Provider, { value: { initializePayment: initializePayment, onSuccess: onSuccess, onClose: onClose } }, children));
 };
 
 var PaystackConsumerChild = function (_a) {
@@ -171,8 +166,8 @@ var PaystackConsumer = React.forwardRef(function (_a, ref) {
     var children = _a.children, paraSuccess = _a.onSuccess, paraClose = _a.onClose, others = __rest(_a, ["children", "onSuccess", "onClose"]);
     var onSuccess = paraSuccess ? paraSuccess : function () { return null; };
     var onClose = paraClose ? paraClose : function () { return null; };
-    return (React__default["default"].createElement(PaystackProvider, __assign({}, others, { onSuccess: onSuccess, onClose: onClose }),
-        React__default["default"].createElement(PaystackConsumerChild, { ref: ref }, children)));
+    return (React.createElement(PaystackProvider, __assign({}, others, { onSuccess: onSuccess, onClose: onClose }),
+        React.createElement(PaystackConsumerChild, { ref: ref }, children)));
 });
 
 exports.PaystackButton = PaystackButton;

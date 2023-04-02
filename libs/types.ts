@@ -28,7 +28,7 @@ interface PaystackMetadata {
   [key: string]: any;
 }
 
-export type callback = (error?: any, response?: any) => void;
+export type callback = (response?: any) => void;
 
 export interface PaystackProps {
   publicKey: string;
