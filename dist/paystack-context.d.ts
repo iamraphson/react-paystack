@@ -2,7 +2,7 @@
 import { callback } from './types';
 type IPaystackContext = {
     initializePayment: (arg0: callback, arg1: callback) => void;
-    onSuccess: () => void;
+    onSuccess: callback;
     onClose: () => void;
 };
 declare const PaystackContext: import("react").Context<IPaystackContext>;
