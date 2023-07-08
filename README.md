@@ -214,6 +214,25 @@ import './App.css';
   export default App;
 ```
 
+### Sending Metadata with Transaction
+If you want to send extra metadata e.g. Transaction description, user that made the transaction. Edit your config like so:
+
+```ts
+    const config = {
+       // Your required fields
+          metadata: {
+            custom_fields: [
+                {
+                    display_name: 'description',
+                    variable_name: 'description',
+                    value: 'Funding Wallet'
+                }
+                // To pass extra metadata, add an object with the same fields as above
+            ]
+        }
+    };
+```
+
 Please checkout [Paystack Documentation](https://developers.paystack.co/docs/paystack-inline) for other available options you can add to the tag
 
 ## Deployment
