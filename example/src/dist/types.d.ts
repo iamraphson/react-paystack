@@ -17,10 +17,10 @@ export type callback = (response?: any) => void;
 export interface PaystackProps {
     publicKey: string;
     email: string;
+    amount: number;
     firstname?: string;
     lastname?: string;
     phone?: phone;
-    amount: number;
     reference?: string;
     metadata?: PaystackMetadata;
     currency?: Currency;
@@ -35,4 +35,9 @@ export interface PaystackProps {
     split_code?: string;
     split?: Record<string, any>;
 }
+export type InitializePayment = (options: {
+    onSuccess?: callback;
+    onClose?: callback;
+    config?: PaystackProps;
+}) => void;
 export {};

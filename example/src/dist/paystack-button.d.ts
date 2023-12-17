@@ -7,5 +7,5 @@ interface PaystackButtonProps extends PaystackProps {
     onSuccess?: callback;
     onClose?: callback;
 }
-declare const PaystackButton: ({ text, className, children, onSuccess, onClose, ...others }: PaystackButtonProps) => JSX.Element;
+declare const PaystackButton: ({ text, className, children, onSuccess, onClose, ...config }: PaystackButtonProps) => JSX.Element;
 export default PaystackButton;
