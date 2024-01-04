@@ -1,5 +1,5 @@
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES' | 'XOF';
-type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'eft' | 'bank_transfer' | 'payattitude';
+export type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'eft' | 'bank_transfer' | 'payattitude';
 type Bearer = 'account' | 'subaccount';
 type phone = number | string;
 interface PaystackCustomFields {
@@ -23,8 +23,8 @@ export interface PaystackProps {
     phone?: phone;
     reference?: string;
     metadata?: PaystackMetadata;
-    currency?: Currency;
-    channels?: PaymentChannels[];
+    currency?: Currency | string;
+    channels?: PaymentChannels[] | string[];
     label?: string;
     plan?: string;
     quantity?: number;

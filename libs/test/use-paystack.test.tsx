@@ -6,8 +6,11 @@ import usePaystackPayment from '../use-paystack';
 import {callPaystackPop} from '../paystack-actions';
 import usePaystackScript from '../paystack-script';
 import {config} from './fixtures';
+import {Currency, PaymentChannels} from '../types';
 
 jest.mock('../paystack-actions');
+const onSuccess = jest.fn();
+const onClose = jest.fn();
 
 describe('usePaystackPayment()', () => {
   beforeEach(() => {
@@ -25,8 +28,6 @@ describe('usePaystackPayment()', () => {
     const {result, rerender} = renderHook(() => usePaystackPayment(config));
     rerender();
 
-    const onSuccess = jest.fn();
-    const onClose = jest.fn();
     act(() => {
       result.current({onSuccess, onClose});
     });
@@ -92,6 +93,68 @@ describe('usePaystackPayment()', () => {
       result.current({});
     });
 
+    expect(callPaystackPop).toHaveBeenCalledTimes(1);
+  });
+
+  it('should usePaystackPayment accept parameter parameters', () => {
+    const currency: Currency = 'GHS';
+    const channels: PaymentChannels[] = ['mobile_money', 'ussd'];
+    const moreConfig = {
+      amount: config.amount,
+      email: config.email,
+      metadata: {
+        custom_fields: [
+          {
+            display_name: 'Mobile Number',
+            variable_name: 'mobile_number',
+            value: '2348012345678',
+          },
+        ],
+        cart_id: 398,
+      },
+      currency,
+      channels,
+      plan: '1',
+      subaccount: 'ACCT_olodo',
+      'data-custom-button': 'savage',
+      quantity: 2,
+      split_code: 'SPL_ehshjerjh1232343',
+      firstname: '404',
+      lastname: 'err',
+      phone: '080456789012',
+      split: {
+        type: 'percentage',
+        bearer_type: 'all-proportional',
+        subaccounts: [
+          {
+            subaccount: 'ACCT_hhs519xgrbocdtr',
+            share: 30,
+          },
+          {
+            subaccount: 'ACCT_fpzizqxofyshxs5',
+            share: 20,
+          },
+        ],
+      },
+    };
+
+    const {result, rerender} = renderHook(() =>
+      usePaystackPayment({
+        ...config,
+      }),
+    );
+
+    rerender();
+    act(() => {
+      result.current({
+        config: moreConfig,
+        onSuccess,
+        onClose,
+      });
+    });
+
+    expect(onSuccess).toHaveBeenCalledTimes(0);
+    expect(onClose).toHaveBeenCalledTimes(0);
     expect(callPaystackPop).toHaveBeenCalledTimes(1);
   });
 

@@ -1,6 +1,6 @@
 export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES' | 'XOF';
 
-type PaymentChannels =
+export type PaymentChannels =
   | 'bank'
   | 'card'
   | 'qr'
@@ -39,8 +39,8 @@ export interface PaystackProps {
   phone?: phone;
   reference?: string;
   metadata?: PaystackMetadata;
-  currency?: Currency;
-  channels?: PaymentChannels[];
+  currency?: Currency | string;
+  channels?: PaymentChannels[] | string[];
   label?: string;
   plan?: string;
   quantity?: number;

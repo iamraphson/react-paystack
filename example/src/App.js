@@ -32,7 +32,7 @@ const onSuccess = (reference) => {
 };
 
 const onClose = () => {
-  // implementation for  whatever you want to do when the Paystack dialog closed.
+  // implementation for whatever you want to do when the Paystack dialog closed.
   console.log('closed');
 };
 
@@ -49,6 +49,21 @@ const PaystackHookExample = () => {
       </button>
     </div>
   );
+};
+
+const PaystackHookSplitParameterExample = () => {
+    const initializePayment = usePaystackPayment(config);
+    return (
+        <div>
+            <button
+                onClick={() => {
+                    initializePayment({config: {currency: 'NGN'}, onSuccess, onClose});
+                }}
+            >
+                Paystack Hooks with split parameter Implementation
+            </button>
+        </div>
+    );
 };
 
 function App() {
@@ -76,6 +91,7 @@ function App() {
         </a>
       </header>
       <PaystackHookExample />
+      <PaystackHookSplitParameterExample />
       <PaystackButton {...componentProps} />
       <PaystackConsumer {...componentProps}>
         {({initializePayment}) => {
