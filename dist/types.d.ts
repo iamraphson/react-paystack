@@ -1,4 +1,4 @@
-type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES' | 'XOF';
+export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR' | 'KES' | 'XOF';
 type PaymentChannels = 'bank' | 'card' | 'qr' | 'ussd' | 'mobile_money' | 'eft' | 'bank_transfer' | 'payattitude';
 type Bearer = 'account' | 'subaccount';
 type phone = number | string;
@@ -38,6 +38,7 @@ export interface PaystackProps {
 export type InitializePayment = (options: {
     onSuccess?: callback;
     onClose?: callback;
-    config?: PaystackProps;
+    config?: Omit<PaystackProps, 'publicKey'>;
 }) => void;
+export type HookConfig = Omit<Partial<PaystackProps>, 'publicKey'> & Pick<PaystackProps, 'publicKey'>;
 export {};
