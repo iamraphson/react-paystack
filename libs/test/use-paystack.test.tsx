@@ -28,7 +28,7 @@ describe('usePaystackPayment()', () => {
     const onSuccess = jest.fn();
     const onClose = jest.fn();
     act(() => {
-      result.current(onSuccess, onClose);
+      result.current({onSuccess, onClose});
     });
 
     expect(onSuccess).toHaveBeenCalledTimes(0);
@@ -41,7 +41,7 @@ describe('usePaystackPayment()', () => {
     rerender();
 
     act(() => {
-      result.current();
+      result.current({});
     });
 
     expect(callPaystackPop).toHaveBeenCalledTimes(1);
@@ -89,7 +89,7 @@ describe('usePaystackPayment()', () => {
     );
     rerender();
     act(() => {
-      result.current();
+      result.current({});
     });
 
     expect(callPaystackPop).toHaveBeenCalledTimes(1);
@@ -100,7 +100,7 @@ describe('usePaystackPayment()', () => {
     rerender();
     const Btn = (): any => (
       <div>
-        <button onClick={(): any => result.current()}>Donation</button>{' '}
+        <button onClick={(): any => result.current({})}>Donation</button>{' '}
       </div>
     );
 
@@ -120,7 +120,7 @@ describe('usePaystackPayment()', () => {
 
     rerender();
     act(() => {
-      result.current();
+      result.current({});
     });
 
     // @ts-ignore

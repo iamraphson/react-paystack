@@ -16,11 +16,15 @@ const PaystackButton = ({
   children,
   onSuccess,
   onClose,
-  ...others
+  ...config
 }: PaystackButtonProps): JSX.Element => {
-  const initializePayment = usePaystackPayment(others);
+  const initializePayment = usePaystackPayment(config);
+
   return (
-    <button className={className} onClick={(): void => initializePayment(onSuccess, onClose)}>
+    <button
+      className={className}
+      onClick={(): void => initializePayment({config, onSuccess, onClose})}
+    >
       {text || children}
     </button>
   );

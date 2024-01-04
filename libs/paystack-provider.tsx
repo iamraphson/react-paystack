@@ -13,11 +13,12 @@ const PaystackProvider = ({
   children,
   onSuccess,
   onClose,
-  ...others
+  ...config
 }: PaystackProviderProps): JSX.Element => {
-  const initializePayment = usePaystackPayment(others);
+  const initializePayment = usePaystackPayment(config);
+
   return (
-    <PaystackContext.Provider value={{initializePayment, onSuccess, onClose}}>
+    <PaystackContext.Provider value={{config, initializePayment, onSuccess, onClose}}>
       {children}
     </PaystackContext.Provider>
   );

@@ -1,12 +1,15 @@
 import {createContext} from 'react';
-import {callback} from './types';
+import {InitializePayment, PaystackProps} from './types';
+
 type IPaystackContext = {
-  initializePayment: (arg0: callback, arg1: callback) => void;
+  config: PaystackProps;
+  initializePayment: InitializePayment;
   onSuccess: () => void;
   onClose: () => void;
 };
 
 const PaystackContext = createContext<IPaystackContext>({
+  config: {} as PaystackProps,
   initializePayment: () => null,
   onSuccess: () => null,
   onClose: () => null,

@@ -1,41 +1,42 @@
 import {useEffect} from 'react';
-import {callback, PaystackProps} from './types';
+import {HookConfig, InitializePayment} from './types';
 import usePaystackScript from './paystack-script';
 import {callPaystackPop} from './paystack-actions';
 
-export default function usePaystackPayment(
-  options: PaystackProps,
-): (callback?: () => void, onClose?: () => void) => void {
+export default function usePaystackPayment(hookConfig: HookConfig): InitializePayment {
   const [scriptLoaded, scriptError] = usePaystackScript();
-  const {
-    publicKey,
-    firstname,
-    lastname,
-    phone,
-    email,
-    amount,
-    reference,
-    metadata = {},
-    currency = 'NGN',
-    channels,
-    label = '',
-    plan = '',
-    quantity = '',
-    subaccount = '',
-    transaction_charge = 0,
-    bearer = 'account',
-    split,
-    split_code,
-  } = options;
 
-  function initializePayment(callback?: callback, onClose?: callback): void {
+  function initializePayment({config, onSuccess, onClose}: Parameters<InitializePayment>[0]): void {
     if (scriptError) {
       throw new Error('Unable to load paystack inline script');
     }
 
+    const args = {...hookConfig, ...config};
+
+    const {
+      publicKey,
+      firstname,
+      lastname,
+      phone,
+      email,
+      amount,
+      reference,
+      metadata = {},
+      currency = 'NGN',
+      channels,
+      label = '',
+      plan = '',
+      quantity = '',
+      subaccount = '',
+      transaction_charge = 0,
+      bearer = 'account',
+      split,
+      split_code,
+    } = args;
+
     if (scriptLoaded) {
       const paystackArgs: Record<string, any> = {
-        callback: callback ? callback : () => null,
+        callback: onSuccess ? onSuccess : () => null,
         onClose: onClose ? onClose : () => null,
         key: publicKey,
         ref: reference,
@@ -47,7 +48,6 @@ export default function usePaystackPayment(
         currency,
         plan,
         quantity,
-        'data-custom-button': options['data-custom-button'] || '',
         channels,
         subaccount,
         transaction_charge,
@@ -56,6 +56,7 @@ export default function usePaystackPayment(
         metadata,
         split,
         split_code,
+        'data-custom-button': args['data-custom-button'] || '',
       };
       callPaystackPop(paystackArgs);
     }
