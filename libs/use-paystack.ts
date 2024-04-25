@@ -32,6 +32,8 @@ export default function usePaystackPayment(hookConfig: HookConfig): InitializePa
       bearer = 'account',
       split,
       split_code,
+      connect_account,
+      connect_split,
     } = args;
 
     if (scriptLoaded) {
@@ -56,6 +58,8 @@ export default function usePaystackPayment(hookConfig: HookConfig): InitializePa
         metadata,
         split,
         split_code,
+        connect_split,
+        connect_account,
         'data-custom-button': args['data-custom-button'] || '',
       };
       callPaystackPop(paystackArgs);

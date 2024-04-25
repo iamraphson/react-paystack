@@ -52,18 +52,18 @@ const PaystackHookExample = () => {
 };
 
 const PaystackHookSplitParameterExample = () => {
-    const initializePayment = usePaystackPayment(config);
-    return (
-        <div>
-            <button
-                onClick={() => {
-                    initializePayment({config: {currency: 'NGN'}, onSuccess, onClose});
-                }}
-            >
-                Paystack Hooks with split parameter Implementation
-            </button>
-        </div>
-    );
+  const initializePayment = usePaystackPayment(config);
+  return (
+    <div>
+      <button
+        onClick={() => {
+          initializePayment({config: {currency: 'NGN'}, onSuccess, onClose});
+        }}
+      >
+        Paystack Hooks with split parameter Implementation
+      </button>
+    </div>
+  );
 };
 
 function App() {

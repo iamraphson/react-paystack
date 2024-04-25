@@ -86,6 +86,17 @@ describe('usePaystackPayment()', () => {
             },
           ],
         },
+        connect_account: 'C_ACT_911WDFTY6GW',
+        connect_split: [
+          {
+            account_id: 'C_ACT_911WDFTY6GW',
+            share: 70,
+          },
+          {
+            account_id: 'C_ACT_DHRI3498VB',
+            share: 8,
+          },
+        ],
       }),
     );
     rerender();
@@ -96,7 +107,7 @@ describe('usePaystackPayment()', () => {
     expect(callPaystackPop).toHaveBeenCalledTimes(1);
   });
 
-  it('should usePaystackPayment accept parameter parameters', () => {
+  it('should usePaystackPayment accept parameters', () => {
     const currency: Currency = 'GHS';
     const channels: PaymentChannels[] = ['mobile_money', 'ussd'];
     const moreConfig = {
@@ -136,6 +147,17 @@ describe('usePaystackPayment()', () => {
           },
         ],
       },
+      connect_account: 'C_ACT_911WDFTY6GW',
+      connect_split: [
+        {
+          account_id: 'C_ACT_911WDFTY6GW',
+          share: 70,
+        },
+        {
+          account_id: 'C_ACT_DHRI3498VB',
+          share: 8,
+        },
+      ],
     };
 
     const {result, rerender} = renderHook(() =>
