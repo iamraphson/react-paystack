@@ -28,6 +28,11 @@ interface PaystackMetadata {
   [key: string]: any;
 }
 
+interface PaystackConnectSplit {
+  account_id: string;
+  share: number;
+}
+
 export type callback = (response?: any) => void;
 
 export interface PaystackProps {
@@ -50,6 +55,8 @@ export interface PaystackProps {
   'data-custom-button'?: string;
   split_code?: string;
   split?: Record<string, any>;
+  connect_split?: PaystackConnectSplit[];
+  connect_account?: string;
 }
 
 export type InitializePayment = (options: {
