@@ -1,5 +1,6 @@
 'use strict';
 
+var PaystackPop = require('@paystack/inline-js');
 var React = require('react');
 
 /******************************************************************************
@@ -47,104 +48,59 @@ typeof SuppressedError === "function" ? SuppressedError : function (error, suppr
     return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
 };
 
-var cachedScripts = [];
-function usePaystackScript() {
-    var src = 'https://js.paystack.co/v1/inline.js';
-    var _a = React.useState({
-        loaded: false,
-        error: false,
-    }), state = _a[0], setState = _a[1];
-    React.useEffect(function () {
-        if (cachedScripts.includes(src)) {
-            setState({
-                loaded: true,
-                error: false,
-            });
-        }
-        else {
-            cachedScripts.push(src);
-            var script_1 = document.createElement('script');
-            script_1.src = src;
-            script_1.async = true;
-            var onScriptLoad_1 = function () {
-                setState({
-                    loaded: true,
-                    error: false,
-                });
-            };
-            var onScriptError_1 = function () {
-                var index = cachedScripts.indexOf(src);
-                if (index >= 0)
-                    cachedScripts.splice(index, 1);
-                script_1.remove();
-                setState({
-                    loaded: true,
-                    error: true,
-                });
-            };
-            script_1.addEventListener('load', onScriptLoad_1);
-            script_1.addEventListener('complete', onScriptLoad_1);
-            script_1.addEventListener('error', onScriptError_1);
-            document.body.appendChild(script_1);
-            return function () {
-                script_1.removeEventListener('load', onScriptLoad_1);
-                script_1.removeEventListener('error', onScriptError_1);
-            };
-        }
-    }, [src]);
-    return [state.loaded, state.error];
-}
-
-/* eslint-disable */
 var callPaystackPop = function (paystackArgs) {
-    // @ts-ignore
-    var handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
-    handler && handler.openIframe();
+    var paystack = new PaystackPop();
+    paystack.newTransaction(paystackArgs);
 };
 
 function usePaystackPayment(hookConfig) {
-    var _a = usePaystackScript(), scriptLoaded = _a[0], scriptError = _a[1];
     function initializePayment(_a) {
         var config = _a.config, onSuccess = _a.onSuccess, onClose = _a.onClose;
-        if (scriptError) {
-            throw new Error('Unable to load paystack inline script');
-        }
         var args = __assign(__assign({}, hookConfig), config);
         var publicKey = args.publicKey, firstname = args.firstname, lastname = args.lastname, phone = args.phone, email = args.email, amount = args.amount, reference = args.reference, _b = args.metadata, metadata = _b === void 0 ? {} : _b, _c = args.currency, currency = _c === void 0 ? 'NGN' : _c, channels = args.channels, _d = args.label, label = _d === void 0 ? '' : _d, _e = args.plan, plan = _e === void 0 ? '' : _e, _f = args.quantity, quantity = _f === void 0 ? '' : _f, _g = args.subaccount, subaccount = _g === void 0 ? '' : _g, _h = args.transaction_charge, transaction_charge = _h === void 0 ? 0 : _h, _j = args.bearer, bearer = _j === void 0 ? 'account' : _j, split = args.split, split_code = args.split_code, connect_account = args.connect_account, connect_split = args.connect_split;
-        if (scriptLoaded) {
-            var paystackArgs = {
-                callback: onSuccess ? onSuccess : function () { return null; },
-                onClose: onClose ? onClose : function () { return null; },
-                key: publicKey,
-                ref: reference,
-                email: email,
-                firstname: firstname,
-                lastname: lastname,
-                phone: phone,
-                amount: amount,
-                currency: currency,
-                plan: plan,
-                quantity: quantity,
-                channels: channels,
-                subaccount: subaccount,
-                transaction_charge: transaction_charge,
-                bearer: bearer,
-                label: label,
-                metadata: metadata,
-                split: split,
-                split_code: split_code,
-                connect_split: connect_split,
-                connect_account: connect_account,
-                'data-custom-button': args['data-custom-button'] || '',
-            };
-            callPaystackPop(paystackArgs);
+        var paystackArgs = {
+            onSuccess: onSuccess ? onSuccess : function () { return null; },
+            onCancel: onClose ? onClose : function () { return null; },
+            key: publicKey,
+            ref: reference,
+            email: email,
+            firstname: firstname,
+            lastname: lastname,
+            amount: amount,
+            currency: currency,
+            plan: plan,
+            subaccount: subaccount,
+            transaction_charge: transaction_charge,
+            bearer: bearer,
+            label: label,
+            metadata: metadata,
+        };
+        if (phone) {
+            paystackArgs.phone = phone;
         }
+        if (quantity) {
+            paystackArgs.quantity = quantity;
+        }
+        if (channels) {
+            paystackArgs.channels = channels;
+        }
+        if (split) {
+            paystackArgs.split = split;
+        }
+        if (split_code) {
+            paystackArgs.split_code = split_code;
+        }
+        if (connect_split) {
+            paystackArgs.connect_split = connect_split;
+        }
+        if (connect_account) {
+            paystackArgs.connect_account = connect_account;
+        }
+        if (args['data-custom-button']) {
+            paystackArgs['data-custom-button'] = args['data-custom-button'];
+        }
+        callPaystackPop(paystackArgs);
     }
-    React.useEffect(function () {
-        if (scriptError) {
-            throw new Error('Unable to load paystack inline script');
-        }
-    }, [scriptError]);
     return initializePayment;
 }
 

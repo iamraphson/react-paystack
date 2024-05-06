@@ -1,16 +1,8 @@
-import {useEffect} from 'react';
 import {HookConfig, InitializePayment} from './types';
-import usePaystackScript from './paystack-script';
 import {callPaystackPop} from './paystack-actions';
 
 export default function usePaystackPayment(hookConfig: HookConfig): InitializePayment {
-  const [scriptLoaded, scriptError] = usePaystackScript();
-
   function initializePayment({config, onSuccess, onClose}: Parameters<InitializePayment>[0]): void {
-    if (scriptError) {
-      throw new Error('Unable to load paystack inline script');
-    }
-
     const args = {...hookConfig, ...config};
 
     const {
@@ -35,42 +27,58 @@ export default function usePaystackPayment(hookConfig: HookConfig): InitializePa
       connect_account,
       connect_split,
     } = args;
+    const paystackArgs: Record<string, any> = {
+      onSuccess: onSuccess ? onSuccess : () => null,
+      onCancel: onClose ? onClose : () => null,
+      key: publicKey,
+      ref: reference,
+      email,
+      firstname,
+      lastname,
+      amount,
+      currency,
+      plan,
+      subaccount,
+      transaction_charge,
+      bearer,
+      label,
+      metadata,
+    };
 
-    if (scriptLoaded) {
-      const paystackArgs: Record<string, any> = {
-        callback: onSuccess ? onSuccess : () => null,
-        onClose: onClose ? onClose : () => null,
-        key: publicKey,
-        ref: reference,
-        email,
-        firstname,
-        lastname,
-        phone,
-        amount,
-        currency,
-        plan,
-        quantity,
-        channels,
-        subaccount,
-        transaction_charge,
-        bearer,
-        label,
-        metadata,
-        split,
-        split_code,
-        connect_split,
-        connect_account,
-        'data-custom-button': args['data-custom-button'] || '',
-      };
-      callPaystackPop(paystackArgs);
+    if (phone) {
+      paystackArgs.phone = phone;
     }
+
+    if (quantity) {
+      paystackArgs.quantity = quantity;
+    }
+
+    if (channels) {
+      paystackArgs.channels = channels;
+    }
+
+    if (split) {
+      paystackArgs.split = split;
+    }
+
+    if (split_code) {
+      paystackArgs.split_code = split_code;
+    }
+
+    if (connect_split) {
+      paystackArgs.connect_split = connect_split;
+    }
+
+    if (connect_account) {
+      paystackArgs.connect_account = connect_account;
+    }
+
+    if (args['data-custom-button']) {
+      paystackArgs['data-custom-button'] = args['data-custom-button'];
+    }
+
+    callPaystackPop(paystackArgs);
   }
-
-  useEffect(() => {
-    if (scriptError) {
-      throw new Error('Unable to load paystack inline script');
-    }
-  }, [scriptError]);
 
   return initializePayment;
 }

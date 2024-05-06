@@ -1,1 +1,1 @@
-export declare let callPaystackPop: (paystackArgs: Record<string, any>) => void;
+export declare const callPaystackPop: (paystackArgs: Record<string, any>) => void;

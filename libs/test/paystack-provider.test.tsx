@@ -1,9 +1,7 @@
 import React from 'react';
-// @ts-ignore
-import {renderHook, cleanup, act} from '@testing-library/react-hooks';
+import {renderHook, cleanup} from '@testing-library/react-hooks';
 import {render, fireEvent} from '@testing-library/react';
 import {callPaystackPop} from '../paystack-actions';
-import usePaystackScript from '../paystack-script';
 import PaystackConsumer from '../paystack-consumer';
 import {config} from './fixtures';
 
@@ -20,7 +18,6 @@ describe('<PaystackProvider />', () => {
   beforeEach(() => {
     // @ts-ignore
     callPaystackPop = jest.fn();
-    renderHook(() => usePaystackScript());
   });
 
   afterAll(() => {

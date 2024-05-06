@@ -3,7 +3,6 @@ import React from 'react';
 import {renderHook, cleanup, act} from '@testing-library/react-hooks';
 import {render, fireEvent} from '@testing-library/react';
 import {callPaystackPop} from '../paystack-actions';
-import usePaystackScript from '../paystack-script';
 import PaystackButton from '../paystack-button';
 import {config} from './fixtures';
 
@@ -21,7 +20,6 @@ describe('<PaystackButton />', () => {
   beforeEach(() => {
     // @ts-ignore
     callPaystackPop = jest.fn();
-    renderHook(() => usePaystackScript());
   });
 
   afterAll(() => {
