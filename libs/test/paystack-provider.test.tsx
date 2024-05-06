@@ -1,5 +1,5 @@
 import React from 'react';
-import {renderHook, cleanup} from '@testing-library/react-hooks';
+import {cleanup} from '@testing-library/react-hooks';
 import {render, fireEvent} from '@testing-library/react';
 import {callPaystackPop} from '../paystack-actions';
 import PaystackConsumer from '../paystack-consumer';

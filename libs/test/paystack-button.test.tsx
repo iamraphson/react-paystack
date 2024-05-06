@@ -1,6 +1,5 @@
 import React from 'react';
-// @ts-ignore
-import {renderHook, cleanup, act} from '@testing-library/react-hooks';
+import {cleanup} from '@testing-library/react-hooks';
 import {render, fireEvent} from '@testing-library/react';
 import {callPaystackPop} from '../paystack-actions';
 import PaystackButton from '../paystack-button';
