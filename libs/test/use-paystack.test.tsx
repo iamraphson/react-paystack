@@ -63,7 +63,6 @@ describe('usePaystackPayment()', () => {
         channels: ['mobile_money', 'ussd'],
         plan: '1',
         subaccount: 'ACCT_olodo',
-        'data-custom-button': 'savage',
         quantity: 2,
         split_code: 'SPL_ehshjerjh1232343',
         firstname: '404',

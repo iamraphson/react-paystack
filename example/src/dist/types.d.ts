@@ -35,11 +35,11 @@ export interface PaystackProps {
     subaccount?: string;
     transaction_charge?: number;
     bearer?: Bearer;
-    'data-custom-button'?: string;
     split_code?: string;
     split?: Record<string, any>;
     connect_split?: PaystackConnectSplit[];
     connect_account?: string;
+    onBankTransferConfirmationPending?: callback;
 }
 export type InitializePayment = (options: {
     onSuccess?: callback;
