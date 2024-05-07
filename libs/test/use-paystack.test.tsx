@@ -1,10 +1,8 @@
-// @ts-ignore
 import {renderHook, cleanup, act} from '@testing-library/react-hooks';
 import {render, fireEvent} from '@testing-library/react';
 import React from 'react';
 import usePaystackPayment from '../use-paystack';
 import {callPaystackPop} from '../paystack-actions';
-import usePaystackScript from '../paystack-script';
 import {config} from './fixtures';
 import {Currency, PaymentChannels} from '../types';
 
@@ -16,7 +14,6 @@ describe('usePaystackPayment()', () => {
   beforeEach(() => {
     // @ts-ignore
     callPaystackPop = jest.fn();
-    renderHook(() => usePaystackScript());
   });
 
   afterAll(() => {
@@ -66,7 +63,6 @@ describe('usePaystackPayment()', () => {
         channels: ['mobile_money', 'ussd'],
         plan: '1',
         subaccount: 'ACCT_olodo',
-        'data-custom-button': 'savage',
         quantity: 2,
         split_code: 'SPL_ehshjerjh1232343',
         firstname: '404',

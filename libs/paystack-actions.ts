@@ -1,6 +1,6 @@
-/* eslint-disable */
-export let callPaystackPop = (paystackArgs: Record<string, any>): void => {
-  // @ts-ignore
-  const handler = window.PaystackPop && window.PaystackPop.setup(paystackArgs);
-  handler && handler.openIframe();
+import PaystackPop from '@paystack/inline-js';
+
+export const callPaystackPop = (paystackArgs: Record<string, any>): void => {
+  const paystack = new PaystackPop();
+  paystack.newTransaction(paystackArgs);
 };
