@@ -63,7 +63,10 @@ Note that all 3 implementations produce the same results.
       return (
         <div>
             <button onClick={() => {
-                initializePayment(onSuccess, onClose)
+                initializePayment({
+                    onSuccess,
+                    onClose
+                });
             }}>Paystack Hooks Implementation</button>
         </div>
       );
