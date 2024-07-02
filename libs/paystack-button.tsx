@@ -5,6 +5,7 @@ import {callback, PaystackProps} from './types';
 interface PaystackButtonProps extends PaystackProps {
   text?: string;
   className?: string;
+  disabled?:boolean;
   children?: ReactNode;
   onSuccess?: callback;
   onClose?: callback;
@@ -14,6 +15,7 @@ const PaystackButton = ({
   text,
   className,
   children,
+  disabled,
   onSuccess,
   onClose,
   ...config
@@ -24,6 +26,7 @@ const PaystackButton = ({
     <button
       className={className}
       onClick={(): void => initializePayment({config, onSuccess, onClose})}
+      disabled={disabled}
     >
       {text || children}
     </button>
