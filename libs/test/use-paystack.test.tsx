@@ -1,6 +1,6 @@
-import {renderHook, cleanup, act} from '@testing-library/react-hooks';
+import {renderHook, cleanup} from '@testing-library/react-hooks';
 import {render, fireEvent} from '@testing-library/react';
-import React from 'react';
+import React, {act} from 'react';
 import usePaystackPayment from '../use-paystack';
 import {callPaystackPop} from '../paystack-actions';
 import {config} from './fixtures';
