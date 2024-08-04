@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { InitializePayment, PaystackProps } from './types';
 type IPaystackContext = {
     config: PaystackProps;
