@@ -17,6 +17,7 @@ export default function usePaystackPayment(hookConfig: HookConfig): InitializePa
       currency = 'NGN',
       channels,
       label,
+      accessCode,
       plan,
       quantity,
       subaccount,
@@ -52,8 +53,8 @@ export default function usePaystackPayment(hookConfig: HookConfig): InitializePa
       ...(quantity && {quantity}),
       ...(connect_split && {connect_split}),
       ...(connect_account && {connect_account}),
+      ...(accessCode && {accessCode}),
     };
-
     callPaystackPop(paystackArgs);
   }
 

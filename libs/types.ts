@@ -49,6 +49,7 @@ export interface PaystackProps {
   label?: string;
   plan?: string;
   quantity?: number;
+  accessCode?: string;
   subaccount?: string;
   transaction_charge?: number;
   bearer?: Bearer;

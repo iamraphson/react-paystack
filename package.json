@@ -79,6 +79,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.2.4",
+    "tslib": "^2.7.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.0"
   }
