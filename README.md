@@ -63,7 +63,8 @@ Note that all 3 implementations produce the same results.
       return (
         <div>
             <button onClick={() => {
-                initializePayment(onSuccess, onClose)
+                // Updated usage: pass an object with onSuccess and onClose
+                initializePayment({ onSuccess, onClose });
             }}>Paystack Hooks Implementation</button>
         </div>
       );
@@ -205,7 +206,8 @@ import './App.css';
           </a>
         </header>
         <PaystackConsumer {...componentProps} >
-          {({initializePayment}) => <button onClick={() => initializePayment(handleSuccess, handleClose)}>Paystack Consumer Implementation</button>}
+          {/* Updated usage: pass an object to initializePayment */}
+          {({initializePayment}) => <button onClick={() => initializePayment({ onSuccess: handleSuccess, onClose: handleClose })}>Paystack Consumer Implementation</button>}
         </PaystackConsumer>
       </div>
     );
