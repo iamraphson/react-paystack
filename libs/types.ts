@@ -21,10 +21,7 @@ interface PaystackCustomFields {
 }
 
 interface PaystackMetadata {
-  custom_fields: PaystackCustomFields[];
-}
-
-interface PaystackMetadata {
+  custom_fields?: PaystackCustomFields[];
   [key: string]: any;
 }
 
