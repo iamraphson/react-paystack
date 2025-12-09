@@ -4,7 +4,7 @@ import usePaystackPayment from './use-paystack';
 import {callback, PaystackProps} from './types';
 
 interface PaystackProviderProps extends PaystackProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   onSuccess: callback;
   onClose: callback;
 }

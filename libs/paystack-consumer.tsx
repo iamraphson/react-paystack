@@ -1,4 +1,4 @@
-import React, {forwardRef, useContext, FunctionComponentElement} from 'react';
+import React, {forwardRef, useContext } from 'react';
 import PaystackProvider from './paystack-provider';
 import {PaystackProps} from './types';
 import PaystackContext from './paystack-context';
@@ -9,18 +9,18 @@ interface PaystackConsumerProps extends PaystackProps {
   onClose?: () => void;
 }
 
-const PaystackConsumerChild = ({
-  children,
-  ref,
-}: {
-  children: any;
-  ref: any;
-}): FunctionComponentElement<any> => {
-  const {config, initializePayment, onSuccess, onClose} = useContext(PaystackContext);
+interface PaystackConsumerChildProps {
+  children: (arg: { initializePayment: () => void; ref: React.Ref<any> }) => React.ReactNode;
+}
 
-  const completeInitializePayment = (): void => initializePayment({config, onSuccess, onClose});
-  return children({initializePayment: completeInitializePayment, ref});
-};
+const PaystackConsumerChild = forwardRef<any, PaystackConsumerChildProps>((props, ref) => {
+  const { children } = props;
+  const { config, initializePayment, onSuccess, onClose } = useContext(PaystackContext);
+
+  const completeInitializePayment = (): void => initializePayment({ config, onSuccess, onClose });
+
+  return <>{children({ initializePayment: completeInitializePayment, ref })}</>;
+});
 
 // eslint-disable-next-line react/display-name
 const PaystackConsumer = forwardRef(
