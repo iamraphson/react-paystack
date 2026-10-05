@@ -59,11 +59,20 @@ export interface PaystackProps {
   onBankTransferConfirmationPending?: callback;
 }
 
-export type InitializePayment = (options: {
+export type InitializePaymentOptions = {
   onSuccess?: callback;
   onClose?: callback;
   config?: Omit<PaystackProps, 'publicKey'>;
-}) => void;
+};
+
+export type InitializePayment = {
+  (options?: InitializePaymentOptions): void;
+  (
+    onSuccess?: callback,
+    onClose?: callback,
+    config?: Omit<PaystackProps, 'publicKey'>,
+  ): void;
+};
 
 export type HookConfig = Omit<Partial<PaystackProps>, 'publicKey'> &
   Pick<PaystackProps, 'publicKey'>;

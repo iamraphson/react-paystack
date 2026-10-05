@@ -45,6 +45,39 @@ describe('usePaystackPayment()', () => {
     expect(callPaystackPop).toHaveBeenCalledTimes(1);
   });
 
+  it('should pass if initializePayment is called without arguments', () => {
+    const {result, rerender} = renderHook(() => usePaystackPayment(config));
+    rerender();
+
+    act(() => {
+      result.current();
+    });
+
+    expect(callPaystackPop).toHaveBeenCalledTimes(1);
+  });
+
+  it('should support positional callbacks initializePayment(onSuccess, onClose)', () => {
+    const mockSuccess = jest.fn();
+    const mockClose = jest.fn();
+    const {result, rerender} = renderHook(() => usePaystackPayment(config));
+    rerender();
+
+    act(() => {
+      result.current(mockSuccess, mockClose);
+    });
+
+    expect(callPaystackPop).toHaveBeenCalledTimes(1);
+    const passedArgs = (callPaystackPop as jest.Mock).mock.calls[0][0];
+    expect(passedArgs.onSuccess).toBe(mockSuccess);
+    expect(passedArgs.onCancel).toBe(mockClose);
+
+    passedArgs.onSuccess('ref_test');
+    expect(mockSuccess).toHaveBeenCalledWith('ref_test');
+
+    passedArgs.onCancel();
+    expect(mockClose).toHaveBeenCalledTimes(1);
+  });
+
   it('should usePaystackPayment accept all parameters', () => {
     const {result, rerender} = renderHook(() =>
       usePaystackPayment({

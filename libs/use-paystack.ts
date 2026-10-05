@@ -1,9 +1,35 @@
-import {HookConfig, InitializePayment} from './types';
+import {
+  HookConfig,
+  InitializePayment,
+  InitializePaymentOptions,
+  PaystackProps,
+  callback,
+} from './types';
 import {callPaystackPop} from './paystack-actions';
 
-export default function usePaystackPayment(hookConfig: HookConfig): InitializePayment {
-  function initializePayment({config, onSuccess, onClose}: Parameters<InitializePayment>[0]): void {
-    const args = {...hookConfig, ...config};
+export default function usePaystackPayment(
+  hookConfig: HookConfig,
+): InitializePayment {
+  function initializePayment(
+    optionsOrOnSuccess?: InitializePaymentOptions | callback,
+    onClose?: callback,
+    config?: Omit<PaystackProps, 'publicKey'>,
+  ): void {
+    let resolvedOnSuccess: callback | undefined;
+    let resolvedOnClose: callback | undefined;
+    let resolvedConfig: Omit<PaystackProps, 'publicKey'> | undefined;
+
+    if (typeof optionsOrOnSuccess === 'function') {
+      resolvedOnSuccess = optionsOrOnSuccess;
+      resolvedOnClose = onClose;
+      resolvedConfig = config;
+    } else if (optionsOrOnSuccess && typeof optionsOrOnSuccess === 'object') {
+      resolvedOnSuccess = optionsOrOnSuccess.onSuccess;
+      resolvedOnClose = optionsOrOnSuccess.onClose;
+      resolvedConfig = optionsOrOnSuccess.config;
+    }
+
+    const args = {...hookConfig, ...resolvedConfig};
 
     const {
       publicKey,
@@ -29,8 +55,8 @@ export default function usePaystackPayment(hookConfig: HookConfig): InitializePa
       onBankTransferConfirmationPending,
     } = args;
     const paystackArgs: Record<string, any> = {
-      onSuccess: onSuccess ? onSuccess : () => null,
-      onCancel: onClose ? onClose : () => null,
+      onSuccess: resolvedOnSuccess ? resolvedOnSuccess : () => null,
+      onCancel: resolvedOnClose ? resolvedOnClose : () => null,
       key: publicKey,
       email,
       amount,
